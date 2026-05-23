@@ -1,7 +1,7 @@
 {
-  "name": "trolley-dilemma",
-  "version": "2.0.0",
-  "description": "Multiplayer trolley problem dilemma game",
+  "name": "le-dilemme",
+  "version": "3.0.0",
+  "description": "Multiplayer moral dilemma game with categories and variants",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
