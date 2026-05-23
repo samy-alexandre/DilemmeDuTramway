@@ -9,7 +9,9 @@ const io = new Server(server, { cors: { origin: "*" } });
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const VALID_SCENARIOS = ["classic", "bridge", "loop", "transplant"];
+// Scenario keys follow the format "category:variant" (e.g. "lever:base", "bridge:criminel")
+// Server validates format only; content lives client-side.
+const SCENARIO_KEY_PATTERN = /^[a-z_]+:[a-z_]+$/;
 const rooms = new Map();
 
 function genCode() {
@@ -93,7 +95,7 @@ io.on("connection", (socket) => {
     const code = socket.data.roomCode;
     const room = rooms.get(code);
     if (!room || room.host !== socket.id) return;
-    if (!VALID_SCENARIOS.includes(scenarioKey)) return;
+    if (typeof scenarioKey !== "string" || !SCENARIO_KEY_PATTERN.test(scenarioKey)) return;
     room.currentScenario = scenarioKey;
     room.votes = {};
     room.revealed = false;
