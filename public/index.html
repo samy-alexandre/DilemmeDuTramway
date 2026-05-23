@@ -3,20 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Le Dilemme du Tramway — multijoueur</title>
+<title>Le Dilemme — multijoueur</title>
 <style>
 :root {
-  --bg: #F2EDE3;
-  --paper: #FBF7EC;
-  --paper-warm: #F5EFE0;
-  --ink: #1F1B18;
-  --ink-soft: #4A453F;
-  --ink-faint: #9A938A;
-  --border: #2C2620;
-  --accent-red: #B73B2D;
-  --accent-blue: #3A6BA8;
-  --accent-green: #4F7A3F;
-  --accent-amber: #C28B2A;
+  --bg: #F2EDE3; --paper: #FBF7EC; --paper-warm: #F5EFE0;
+  --ink: #1F1B18; --ink-soft: #4A453F; --ink-faint: #9A938A;
+  --border: #2C2620; --accent-red: #B73B2D; --accent-blue: #3A6BA8;
+  --accent-green: #4F7A3F; --accent-amber: #C28B2A;
   --shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,10 +20,9 @@ body {
 }
 main { max-width: 920px; margin: 0 auto; }
 header { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--ink-faint); }
-h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
+h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 .subtitle { font-style: italic; color: var(--ink-soft); margin-top: 0.35rem; font-size: 0.95rem; }
 
-/* === LOBBY === */
 #lobby { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
 .lobby-card { background: var(--paper); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; }
 .lobby-card h2 { font-size: 1.2rem; font-weight: normal; margin-bottom: 0.5rem; }
@@ -46,7 +38,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
   font-style: italic; font-size: 0.9rem; min-height: 1.5rem; margin-top: 0.5rem;
 }
 
-/* === BUTTONS === */
 .btn, button {
   background: var(--paper); border: 1.5px solid var(--ink);
   padding: 0.85rem 1.5rem; font-family: inherit; font-size: 1rem;
@@ -60,7 +51,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 .btn-reveal:hover:not(:disabled) { background: var(--ink); border-color: var(--ink); }
 .btn-small { padding: 0.4rem 0.85rem; font-size: 0.85rem; width: auto; }
 
-/* === GAME HEADER === */
 .game-header {
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--ink-faint);
@@ -69,7 +59,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 .game-header strong { font-weight: normal; font-size: 1.05rem; }
 .muted { color: var(--ink-soft); margin-left: 0.5rem; font-size: 0.9rem; }
 
-/* === PLAYERS BAR === */
 .players-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
 .player-chip {
   background: var(--paper-warm); border: 1px solid var(--ink-faint);
@@ -82,31 +71,31 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 .player-chip.voted::after { content: "✓"; color: var(--accent-green); margin-left: 0.2rem; }
 .player-chip.me.voted::after { color: #95C77E; }
 
-/* === SCENE === */
 .scene {
   background: var(--paper); border: 1px solid var(--border); border-radius: 6px;
   padding: 1rem; margin-bottom: 1rem; box-shadow: var(--shadow);
 }
 .scene svg { width: 100%; height: auto; display: block; }
 
-/* === STATUS === */
 .status {
   text-align: center; font-style: italic; color: var(--ink-soft);
   margin-bottom: 1.25rem; min-height: 1.5rem; font-size: 0.95rem;
 }
 
-/* === INTRO CARD === */
 .intro-card {
   background: var(--paper-warm); border-left: 3px solid var(--ink);
-  padding: 0.9rem 1.15rem; margin-bottom: 1rem; font-style: italic;
+  padding: 0.9rem 1.15rem; margin-bottom: 1rem;
   font-size: 0.95rem; color: var(--ink-soft); border-radius: 0 4px 4px 0;
 }
-.intro-card strong {
-  display: block; font-style: normal; color: var(--ink);
-  margin-bottom: 0.35rem; font-size: 1rem;
+.intro-card .intro-title {
+  display: block; color: var(--ink); margin-bottom: 0.45rem;
+  font-size: 1rem; font-weight: normal;
 }
+.intro-card .intro-title .cat { letter-spacing: 0.3px; }
+.intro-card .intro-title .sep { color: var(--ink-faint); margin: 0 0.4rem; }
+.intro-card .intro-title .var { font-style: italic; }
+.intro-card .intro-body { font-style: italic; }
 
-/* === VOTE === */
 .vote-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 1rem; }
 .vote-confirm {
   background: var(--paper); border: 1px solid var(--border); border-radius: 4px;
@@ -115,23 +104,45 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 }
 .vote-confirm strong { color: var(--ink); font-style: normal; }
 
-/* === HOST PANEL === */
 .host-panel, .waiting-panel {
   background: var(--paper); border: 1px solid var(--border);
   border-radius: 6px; padding: 1.5rem; margin-bottom: 1rem;
 }
 .host-panel h3 { font-size: 1.1rem; font-weight: normal; margin-bottom: 1rem; font-style: italic; }
-.scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-.scenario-card {
-  background: transparent; border: 1px solid var(--ink-faint);
-  padding: 0.85rem 1rem; text-align: left; cursor: pointer;
-  font-family: inherit; font-size: 0.95rem; color: var(--ink);
-  border-radius: 4px; transition: all 0.15s; width: 100%;
-}
-.scenario-card:hover { background: var(--bg); border-color: var(--ink); }
-.scenario-card strong { display: block; font-weight: normal; margin-bottom: 0.15rem; }
-.scenario-card small { display: block; font-size: 0.82rem; opacity: 0.75; font-style: italic; }
 .waiting-panel { text-align: center; color: var(--ink-soft); font-size: 0.95rem; }
+
+/* === ACCORDION (categories & variants) === */
+.category-accordion {
+  border: 1px solid var(--ink-faint); border-radius: 4px;
+  margin-bottom: 0.6rem; background: var(--paper-warm); overflow: hidden;
+}
+.category-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.85rem 1.1rem; cursor: pointer; background: transparent;
+  border: none; font-family: inherit; font-size: 1rem;
+  width: 100%; text-align: left; color: var(--ink); transition: background 0.15s;
+}
+.category-header:hover { background: var(--bg); color: var(--ink); }
+.category-header strong { font-weight: normal; }
+.category-header .theme { font-size: 0.82rem; color: var(--ink-soft); font-style: italic; margin-left: 0.5rem; }
+.category-header:hover .theme { color: var(--ink-soft); }
+.category-header .chevron { transition: transform 0.2s; color: var(--ink-faint); font-size: 0.8rem; }
+.category-accordion.open .chevron { transform: rotate(90deg); }
+.variant-list {
+  display: none; padding: 0 0.5rem 0.5rem;
+  flex-direction: column; gap: 0.4rem;
+}
+.category-accordion.open .variant-list { display: flex; }
+.variant-card {
+  background: var(--paper); border: 1px solid var(--ink-faint);
+  padding: 0.6rem 0.9rem; text-align: left; cursor: pointer;
+  font-family: inherit; font-size: 0.92rem; color: var(--ink);
+  border-radius: 3px; transition: all 0.15s; width: 100%;
+}
+.variant-card:hover { background: var(--bg); border-color: var(--ink); color: var(--ink); }
+.variant-card strong { display: block; font-weight: normal; margin-bottom: 0.1rem; }
+.variant-card small { display: block; font-size: 0.78rem; opacity: 0.7; font-style: italic; }
+.variant-card:hover small { opacity: 0.85; }
 
 /* === REVEAL === */
 .reveal-card {
@@ -171,7 +182,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 .body-count .deaths strong { color: var(--accent-red); }
 .body-count .saved strong { color: var(--accent-green); }
 
-/* === HISTORY === */
 #history-section {
   margin-top: 1.5rem; background: var(--paper); border: 1px solid var(--border);
   border-radius: 6px; padding: 0.85rem 1.1rem;
@@ -183,7 +193,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 .history-round ul { list-style: none; padding-left: 0; color: var(--ink-soft); }
 .history-round li { padding: 0.15rem 0; }
 
-/* === SVG ANIMATIONS === */
 #tram { transition: transform 2.6s cubic-bezier(0.3, 0, 0.7, 1); }
 #lever-arm { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: 0 0; }
 .victim {
@@ -201,10 +210,9 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
   100% { opacity: 0; transform: scale(1.9); }
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 640px) {
   h1 { font-size: 1.5rem; }
-  #lobby, .vote-controls, .scenario-grid { grid-template-columns: 1fr; }
+  #lobby, .vote-controls { grid-template-columns: 1fr; }
   body { padding: 1rem 0.5rem 3rem; }
   .scene { padding: 0.5rem; }
 }
@@ -213,11 +221,10 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 <body>
 <main>
   <header>
-    <h1>Le dilemme du tramway</h1>
+    <h1>Le Dilemme</h1>
     <p class="subtitle">Expérience de pensée morale — multijoueur</p>
   </header>
 
-  <!-- ========== LOBBY ========== -->
   <section id="lobby">
     <div class="lobby-card">
       <h2>Créer une partie</h2>
@@ -235,7 +242,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
     <p id="lobby-error" class="error"></p>
   </section>
 
-  <!-- ========== GAME ========== -->
   <section id="game" style="display:none">
     <div class="game-header">
       <div>
@@ -247,20 +253,14 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 
     <div class="players-bar" id="players-bar"></div>
 
-    <!-- === TROLLEY SCENE (classic, bridge, loop) === -->
     <div class="scene" id="scene-trolley">
       <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
         <line x1="0" y1="312" x2="900" y2="312" stroke="#9A938A" stroke-width="0.5" stroke-dasharray="3,5"/>
-
-        <!-- Deviated track (classic + loop) -->
         <g id="deviated-track">
           <g stroke="#9B7B54" stroke-width="4">
-            <line x1="600" y1="115" x2="600" y2="170"/>
-            <line x1="640" y1="115" x2="640" y2="170"/>
-            <line x1="680" y1="115" x2="680" y2="170"/>
-            <line x1="720" y1="115" x2="720" y2="170"/>
-            <line x1="760" y1="115" x2="760" y2="170"/>
-            <line x1="800" y1="115" x2="800" y2="170"/>
+            <line x1="600" y1="115" x2="600" y2="170"/><line x1="640" y1="115" x2="640" y2="170"/>
+            <line x1="680" y1="115" x2="680" y2="170"/><line x1="720" y1="115" x2="720" y2="170"/>
+            <line x1="760" y1="115" x2="760" y2="170"/><line x1="800" y1="115" x2="800" y2="170"/>
             <line x1="840" y1="115" x2="840" y2="170"/>
           </g>
           <g stroke="#5C544A" stroke-width="3.5" fill="none" stroke-linecap="round">
@@ -268,44 +268,28 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
             <path d="M 390 265 Q 480 265 540 225 Q 595 185 645 160 L 870 160"/>
           </g>
         </g>
-
-        <!-- Loop indicator -->
         <g id="loop-indicator" style="display:none">
           <path d="M 870 145 Q 895 145 895 200 Q 895 262 870 262" fill="none" stroke="#5C544A" stroke-width="3.5" stroke-dasharray="5,4"/>
           <path d="M 880 256 L 870 262 L 880 270" fill="none" stroke="#5C544A" stroke-width="2.5" stroke-linecap="round"/>
           <text x="895" y="205" text-anchor="middle" font-size="10" fill="#4A453F" font-style="italic" transform="rotate(90 895 205)">la boucle</text>
         </g>
-
-        <!-- Main track ties -->
         <g stroke="#9B7B54" stroke-width="4">
-          <line x1="40" y1="235" x2="40" y2="290"/>
-          <line x1="80" y1="235" x2="80" y2="290"/>
-          <line x1="120" y1="235" x2="120" y2="290"/>
-          <line x1="160" y1="235" x2="160" y2="290"/>
-          <line x1="200" y1="235" x2="200" y2="290"/>
-          <line x1="240" y1="235" x2="240" y2="290"/>
-          <line x1="280" y1="235" x2="280" y2="290"/>
-          <line x1="320" y1="235" x2="320" y2="290"/>
-          <line x1="440" y1="235" x2="440" y2="290"/>
-          <line x1="480" y1="235" x2="480" y2="290"/>
-          <line x1="520" y1="235" x2="520" y2="290"/>
-          <line x1="560" y1="235" x2="560" y2="290"/>
-          <line x1="600" y1="235" x2="600" y2="290"/>
-          <line x1="640" y1="235" x2="640" y2="290"/>
-          <line x1="680" y1="235" x2="680" y2="290"/>
-          <line x1="720" y1="235" x2="720" y2="290"/>
-          <line x1="760" y1="235" x2="760" y2="290"/>
-          <line x1="800" y1="235" x2="800" y2="290"/>
+          <line x1="40" y1="235" x2="40" y2="290"/><line x1="80" y1="235" x2="80" y2="290"/>
+          <line x1="120" y1="235" x2="120" y2="290"/><line x1="160" y1="235" x2="160" y2="290"/>
+          <line x1="200" y1="235" x2="200" y2="290"/><line x1="240" y1="235" x2="240" y2="290"/>
+          <line x1="280" y1="235" x2="280" y2="290"/><line x1="320" y1="235" x2="320" y2="290"/>
+          <line x1="440" y1="235" x2="440" y2="290"/><line x1="480" y1="235" x2="480" y2="290"/>
+          <line x1="520" y1="235" x2="520" y2="290"/><line x1="560" y1="235" x2="560" y2="290"/>
+          <line x1="600" y1="235" x2="600" y2="290"/><line x1="640" y1="235" x2="640" y2="290"/>
+          <line x1="680" y1="235" x2="680" y2="290"/><line x1="720" y1="235" x2="720" y2="290"/>
+          <line x1="760" y1="235" x2="760" y2="290"/><line x1="800" y1="235" x2="800" y2="290"/>
           <line x1="840" y1="235" x2="840" y2="290"/>
         </g>
         <g stroke="#5C544A" stroke-width="3.5" stroke-linecap="round">
           <line x1="20" y1="245" x2="870" y2="245"/>
           <line x1="20" y1="280" x2="870" y2="280"/>
         </g>
-
         <circle cx="395" cy="262" r="5" fill="#1F1B18"/>
-
-        <!-- Lever (classic + loop) -->
         <g id="lever-station" transform="translate(395, 175)">
           <line x1="0" y1="65" x2="0" y2="20" stroke="#1F1B18" stroke-width="4" stroke-linecap="round"/>
           <circle cx="0" cy="20" r="4" fill="#1F1B18"/>
@@ -314,8 +298,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
             <circle id="lever-knob" cx="0" cy="-32" r="6" fill="#B73B2D" stroke="#1F1B18" stroke-width="1.5"/>
           </g>
         </g>
-
-        <!-- Bridge (bridge variant) -->
         <g id="bridge-group" style="display:none">
           <rect x="320" y="172" width="160" height="10" fill="#9B7B54" stroke="#1F1B18" stroke-width="1.5"/>
           <line x1="320" y1="172" x2="320" y2="155" stroke="#1F1B18" stroke-width="2"/>
@@ -333,8 +315,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
             <line x1="15" y1="22" x2="22" y2="40" stroke="#1F1B18" stroke-width="2.5" stroke-linecap="round"/>
           </g>
         </g>
-
-        <!-- Operator -->
         <g id="operator" transform="translate(460, 178)">
           <text id="question-mark" x="-22" y="-22" font-size="26" fill="#B73B2D" font-weight="bold">?</text>
           <circle cx="0" cy="0" r="11" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
@@ -347,8 +327,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
           <line x1="0" y1="58" x2="-9" y2="85" stroke="#1F1B18" stroke-width="2.5" stroke-linecap="round"/>
           <line x1="0" y1="58" x2="9" y2="85" stroke="#1F1B18" stroke-width="2.5" stroke-linecap="round"/>
         </g>
-
-        <!-- Five people -->
         <g id="five-people">
           <g class="victim" transform="translate(653, 250)"><circle cx="0" cy="-5" r="6" fill="#1F1B18"/><rect x="-5" y="1" width="10" height="16" rx="2" fill="#1F1B18"/></g>
           <g class="victim" transform="translate(669, 250)"><circle cx="0" cy="-5" r="6" fill="#1F1B18"/><rect x="-5" y="1" width="10" height="16" rx="2" fill="#1F1B18"/></g>
@@ -357,14 +335,10 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
           <g class="victim" transform="translate(717, 250)"><circle cx="0" cy="-5" r="6" fill="#1F1B18"/><rect x="-5" y="1" width="10" height="16" rx="2" fill="#1F1B18"/></g>
           <text x="685" y="305" text-anchor="middle" font-size="13" fill="#4A453F" font-style="italic">cinq personnes</text>
         </g>
-
-        <!-- One person on deviated -->
         <g id="one-person">
           <g class="victim" transform="translate(750, 144)"><circle cx="0" cy="-5" r="6" fill="#1F1B18"/><rect x="-5" y="1" width="10" height="16" rx="2" fill="#1F1B18"/></g>
           <text x="750" y="105" text-anchor="middle" font-size="13" fill="#4A453F" font-style="italic">une personne</text>
         </g>
-
-        <!-- Impact burst -->
         <g id="impact-burst" class="impact-burst" transform="translate(0,0)">
           <line x1="-14" y1="0" x2="-24" y2="0" stroke="#B73B2D" stroke-width="2.5" stroke-linecap="round"/>
           <line x1="14" y1="0" x2="24" y2="0" stroke="#B73B2D" stroke-width="2.5" stroke-linecap="round"/>
@@ -374,47 +348,35 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
           <line x1="-10" y1="10" x2="-18" y2="18" stroke="#B73B2D" stroke-width="2.5" stroke-linecap="round"/>
           <line x1="10" y1="10" x2="18" y2="18" stroke="#B73B2D" stroke-width="2.5" stroke-linecap="round"/>
         </g>
-
-        <!-- Tram -->
         <g id="tram" transform="translate(105, 225)">
           <line x1="-70" y1="-12" x2="-92" y2="-12" stroke="#1F1B18" stroke-width="1.5"/>
           <line x1="-72" y1="0" x2="-98" y2="0" stroke="#1F1B18" stroke-width="1.5"/>
           <line x1="-70" y1="12" x2="-92" y2="12" stroke="#1F1B18" stroke-width="1.5"/>
           <rect x="-45" y="-28" width="100" height="55" rx="5" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2.5"/>
           <rect x="-45" y="-28" width="100" height="8" fill="#1F1B18"/>
-          <circle cx="-30" cy="-24" r="1.5" fill="#FBF7EC"/>
-          <circle cx="-10" cy="-24" r="1.5" fill="#FBF7EC"/>
-          <circle cx="10" cy="-24" r="1.5" fill="#FBF7EC"/>
-          <circle cx="30" cy="-24" r="1.5" fill="#FBF7EC"/>
+          <circle cx="-30" cy="-24" r="1.5" fill="#FBF7EC"/><circle cx="-10" cy="-24" r="1.5" fill="#FBF7EC"/>
+          <circle cx="10" cy="-24" r="1.5" fill="#FBF7EC"/><circle cx="30" cy="-24" r="1.5" fill="#FBF7EC"/>
           <rect x="-50" y="-15" width="5" height="38" fill="#1F1B18"/>
           <rect x="-38" y="-15" width="22" height="20" fill="#A8C5E0" stroke="#1F1B18" stroke-width="1.5"/>
           <rect x="-12" y="-15" width="22" height="20" fill="#A8C5E0" stroke="#1F1B18" stroke-width="1.5"/>
           <rect x="14" y="-15" width="22" height="20" fill="#A8C5E0" stroke="#1F1B18" stroke-width="1.5"/>
           <circle cx="-48" cy="10" r="3.5" fill="#B73B2D" stroke="#1F1B18" stroke-width="1"/>
-          <circle cx="-25" cy="37" r="9" fill="#1F1B18"/>
-          <circle cx="-25" cy="37" r="3" fill="#FBF7EC"/>
-          <circle cx="35" cy="37" r="9" fill="#1F1B18"/>
-          <circle cx="35" cy="37" r="3" fill="#FBF7EC"/>
+          <circle cx="-25" cy="37" r="9" fill="#1F1B18"/><circle cx="-25" cy="37" r="3" fill="#FBF7EC"/>
+          <circle cx="35" cy="37" r="9" fill="#1F1B18"/><circle cx="35" cy="37" r="3" fill="#FBF7EC"/>
         </g>
       </svg>
     </div>
 
-    <!-- === HOSPITAL SCENE (transplant) === -->
     <div class="scene" id="scene-hospital" style="display:none">
       <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
         <line x1="0" y1="312" x2="900" y2="312" stroke="#9A938A" stroke-width="0.5" stroke-dasharray="3,5"/>
         <line x1="0" y1="100" x2="900" y2="100" stroke="#9A938A" stroke-width="0.5"/>
-
-        <!-- Hospital cross -->
         <g transform="translate(800, 60)">
           <rect x="-14" y="-25" width="28" height="50" fill="#FBF7EC" stroke="#1F1B18" stroke-width="1.5" rx="2"/>
           <rect x="-3" y="-18" width="6" height="36" fill="#B73B2D"/>
           <rect x="-13" y="-3" width="26" height="6" fill="#B73B2D"/>
         </g>
-
-        <!-- Five patients in beds -->
         <g id="five-patients">
-          <!-- Row 1 (bottom) -->
           <g transform="translate(450, 270)">
             <rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/>
             <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
@@ -430,7 +392,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
             <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
             <g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g>
           </g>
-          <!-- Row 2 (top) -->
           <g transform="translate(495, 200)">
             <rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/>
             <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
@@ -443,8 +404,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
           </g>
           <text x="585" y="325" text-anchor="middle" font-size="13" fill="#4A453F" font-style="italic">cinq patients en attente d'organes</text>
         </g>
-
-        <!-- Healthy patient standing -->
         <g id="healthy-patient">
           <g class="victim" transform="translate(180, 285)">
             <circle cx="0" cy="-50" r="11" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
@@ -459,8 +418,6 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
           </g>
           <text x="180" y="325" text-anchor="middle" font-size="13" fill="#4A453F" font-style="italic">un patient sain</text>
         </g>
-
-        <!-- Doctor -->
         <g id="doctor" transform="translate(360, 215)">
           <text id="question-mark-2" x="-22" y="-22" font-size="26" fill="#B73B2D" font-weight="bold">?</text>
           <circle cx="0" cy="0" r="11" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
@@ -481,7 +438,7 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 
     <div class="host-panel" id="host-between" style="display:none">
       <h3>Tour <span id="next-round-num"></span> — Choisissez un dilemme</h3>
-      <div class="scenario-grid" id="scenario-grid"></div>
+      <div id="scenario-grid"></div>
     </div>
 
     <div class="waiting-panel" id="guest-waiting" style="display:none">
@@ -517,164 +474,366 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
 <script src="/socket.io/socket.io.js"></script>
 <script>
 (function() {
-  // ============ DATA ============
-  const SCENARIOS = {
-    classic: {
+  // ===================== DATA =====================
+  // Categories share scene + animation verbs. Variants override intro, labels, philosophy.
+  const CATEGORIES = {
+    lever: {
       name: "Le levier",
-      hint: "Foot (1967)",
-      intro: "Un tramway hors de contrôle fonce vers cinq personnes attachées sur la voie. Vous êtes près d'un aiguillage : en le tirant, le tramway sera dévié vers une voie où une seule personne se trouve attachée.",
-      labels: { act: "Tirer le levier", wait: "Ne rien faire" },
+      theme: "Action vs inaction",
+      family: "trolley",
+      sceneVariant: "classic",
       verbsPresent: { act: "Le levier est tiré...", wait: "Personne n'intervient..." },
       verbsAfter: { act: "Le tramway dévie vers la voie unique.", wait: "Le tramway file vers les cinq." },
-      scene: "trolley", sceneVariant: "classic",
-      outcomes: {
-        act: {
-          tag: "Choix conséquentialiste",
-          title: "Une vie sacrifiée pour cinq",
-          text: "Vous minimisez le nombre de morts. ~90 % des personnes interrogées font ce choix. C'est la position de l'utilitarisme classique (Bentham, Mill) : l'action morale est celle qui maximise le bien-être collectif. Tirer un levier semble psychologiquement acceptable parce qu'on redirige une menace sans toucher physiquement à la victime — mais on devient l'agent direct d'une mort qui n'aurait pas eu lieu sans intervention.",
-          deaths: 1, saved: 5
+      variants: {
+        base: {
+          name: "Le test classique",
+          tagline: "Cinq inconnus, un inconnu",
+          intro: "Un tramway fonce vers cinq inconnus attachés sur la voie. Tirer le levier le dévie vers une voie où un seul inconnu est attaché.",
+          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Conséquentialisme", title: "Une vie pour cinq",
+              text: "Vous minimisez le nombre de morts. Environ neuf personnes sur dix font ce choix. Position défendue par l'utilitarisme classique (Bentham, Mill) : l'action morale est celle qui maximise le bien-être total. Mais en tirant ce levier, vous devenez l'agent direct d'une mort qui n'aurait pas eu lieu sans vous.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Déontologie", title: "Ne pas être l'agent",
+              text: "Vous refusez de devenir l'instrument d'une mort. Position inspirée de Kant : on ne doit jamais traiter une personne comme un simple moyen. La distinction entre tuer et laisser mourir compte moralement — vous n'êtes pas à l'origine du drame. Mais cinq personnes meurent alors que vous pouviez agir.",
+              deaths: 5, saved: 0 }
+          }
         },
-        wait: {
-          tag: "Choix déontologique",
-          title: "Refuser d'être l'agent",
-          text: "Vous refusez de devenir l'agent actif d'une mort. Position inspirée de Kant : on ne doit jamais utiliser une personne comme simple moyen. La distinction entre tuer et laisser mourir compte moralement. Mais cinq personnes meurent alors que vous aviez le pouvoir d'agir.",
-          deaths: 5, saved: 0
+        jeunesse: {
+          name: "La jeunesse contre la vieillesse",
+          tagline: "Toutes les années valent-elles pareil ?",
+          intro: "Sur la voie principale, cinq étudiants de vingt ans qui ont toute la vie devant eux. Sur la voie déviée, un homme de quatre-vingt-cinq ans en fin de vie.",
+          labels: { act: "Sacrifier le vieillard", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Utilitarisme prospectif", title: "Maximiser les années sauvées",
+              text: "Vous valorisez les années de vie restantes — la logique des QALYs en bioéthique, invoquée pour les triages de pandémie ou les listes de transplantation. Peter Singer défend cette position. Mais elle revient à dire qu'une vie de vieillard « vaut moins », ce que rejette l'égalitarisme strict.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Égalitarisme moral", title: "Toute vie a la même valeur",
+              text: "Vous refusez de hiérarchiser les vies par leur « utilité restante ». Toute personne a une dignité égale, indépendamment de son âge (Kant). Mais cinq vies de jeunes adultes sont perdues — beaucoup d'années en moins pour le monde, et autant de familles dévastées.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        proche: {
+          name: "Votre enfant sur la voie",
+          tagline: "L'impartialité, jusqu'où ?",
+          intro: "Sur la voie principale, cinq inconnus. Sur la voie déviée, votre propre enfant.",
+          labels: { act: "Tirer le levier (tuer votre enfant)", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Impartialité cosmopolite", title: "Aucune vie ne pèse plus",
+              text: "Vous appliquez l'impartialité morale jusqu'au bout : votre enfant ne vaut pas plus que cinq inconnus. C'est la position de Peter Singer dans son célèbre essai sur l'enfant qui se noie. Théoriquement cohérente, mais quasiment personne ne la tiendrait en pratique — et faut-il s'en désoler ?",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Devoirs spéciaux", title: "Les liens ont une valeur morale",
+              text: "Vous reconnaissez les « devoirs spéciaux » envers vos proches (Bernard Williams, Susan Wolf). L'éthique du soin considère que les liens biographiques sont moralement chargés — un parent qui n'aurait aucune préférence pour son enfant serait monstrueux à sa façon. Mais les cinq inconnus ont aussi des familles, et vous les sacrifiez pour la vôtre.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        tyran: {
+          name: "Le tyran déchu",
+          tagline: "Le bourreau improvisé",
+          intro: "Sur la voie principale, cinq inconnus. Sur la voie déviée, un dictateur déchu reconnu coupable du génocide de millions de personnes.",
+          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Rétribution + utilité", title: "Le calcul devient évident",
+              text: "Le bilan est ici écrasant : sauver cinq innocents et éliminer un être qui en a tué des millions. Les théories rétributivistes (Kant lui-même, paradoxalement) disent que les actes appellent une réponse proportionnée. Mais agir comme bourreau sans procès ? Aucun État de droit ne le permet, et l'histoire montre que les lynchages se justifient toujours par « son cas est évident ».",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Abolitionnisme strict", title: "Personne ne mérite la mort",
+              text: "Vous refusez de juger qui doit vivre. Même un criminel reconnu garde des droits — c'est la position abolitionniste (Beccaria, Hugo). Mais vous laissez mourir cinq innocents alors qu'un seul coupable suffisait : l'intuition utilitariste se révolte ici contre la doctrine.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        chercheuse: {
+          name: "La chercheuse en oncologie",
+          tagline: "Une vie « utile » vaut-elle plus ?",
+          intro: "Sur la voie principale, cinq ouvriers du bâtiment. Sur la voie déviée, une chercheuse sur le point de découvrir un traitement majeur contre le cancer.",
+          labels: { act: "Sacrifier la chercheuse", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Égalité stricte", title: "Cinq vaut plus qu'une",
+              text: "Vous traitez les vies comme arithmétiquement équivalentes. Cinq dépasse un, peu importe le potentiel ou la profession. C'est l'égalitarisme strict : aucun être humain n'a plus de valeur qu'un autre.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Utilitarisme prospectif", title: "Compter les vies futures",
+              text: "Sauver la chercheuse pourrait sauver des millions à terme. C'est l'utilitarisme étendu au futur. Mais qui peut prédire ces bénéfices ? Et hiérarchiser les vies par leur « utilité sociale » est une logique historiquement dangereuse — l'eugénisme et le productivisme nazi reposaient exactement sur ce raisonnement.",
+              deaths: 5, saved: 0 }
+          }
         }
       }
     },
+
     bridge: {
-      name: "L'homme du pont",
-      hint: "Variante de Thomson",
-      intro: "Vous êtes sur un pont au-dessus de la voie. Le tramway fonce vers cinq personnes. À côté de vous, un homme corpulent : si vous le poussez sur la voie, sa masse arrêtera le tramway. Bilan : une vie contre cinq, comme avec le levier.",
-      labels: { act: "Pousser l'homme", wait: "Ne rien faire" },
+      name: "Le pont",
+      theme: "Utiliser un corps comme moyen",
+      family: "trolley",
+      sceneVariant: "bridge",
       verbsPresent: { act: "L'homme est poussé du pont...", wait: "Personne ne bouge..." },
       verbsAfter: { act: "Le tramway s'écrase contre lui.", wait: "Le tramway file vers les cinq." },
-      scene: "trolley", sceneVariant: "bridge",
-      outcomes: {
-        act: {
-          tag: "Le calcul froid",
-          title: "Utiliser un corps comme instrument",
-          text: "Bilan identique au levier — pourtant seuls ~10 % des gens choisissent de pousser. Pourquoi ? Parce que ce corps n'est pas une victime collatérale : il est le moyen même de sauver les autres. C'est la doctrine du double effet (Thomas d'Aquin) : la mort comme moyen est moralement plus lourde que la mort comme effet secondaire. Joshua Greene a montré par IRM que ce scénario active les zones cérébrales émotionnelles, alors que le levier active les zones du calcul rationnel.",
-          deaths: 1, saved: 5
+      variants: {
+        base: {
+          name: "Le pousseur",
+          tagline: "Pousser un corps inconnu",
+          intro: "Sur un pont au-dessus de la voie, un homme corpulent que vous ne connaissez pas. Sa masse peut arrêter le tramway et sauver les cinq.",
+          labels: { act: "Pousser l'homme", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Le calcul froid", title: "Utiliser un corps comme instrument",
+              text: "Bilan identique au levier — pourtant seuls dix pour cent des gens choisissent de pousser. Le corps de la victime n'est plus collatéral : il devient l'instrument du sauvetage. Doctrine du double effet (Thomas d'Aquin) : la mort comme moyen pèse plus lourd que la mort comme effet secondaire. Joshua Greene a montré par IRM que ce scénario active les zones cérébrales émotionnelles, là où le levier active les zones du calcul rationnel.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Le tabou de l'usage", title: "Ne pas toucher l'innocent",
+              text: "On ne touche pas physiquement à un innocent pour en sauver d'autres. Cette intuition très stable révèle que nos jugements moraux ne sont pas purement utilitaires : la manière compte autant que le résultat. La même arithmétique ne produit pas la même réponse selon le geste.",
+              deaths: 5, saved: 0 }
+          }
         },
-        wait: {
-          tag: "Le tabou de l'usage",
-          title: "Ne pas toucher l'innocent",
-          text: "On ne touche pas physiquement à un innocent pour en sauver d'autres. Cette intuition très stable révèle que nos jugements moraux ne sont pas purement utilitaires : la manière compte autant que le résultat. La même arithmétique ne produit pas la même réponse selon le geste.",
-          deaths: 5, saved: 0
+        criminel: {
+          name: "Le meurtrier reconnu",
+          tagline: "Pousser un coupable",
+          intro: "L'homme corpulent à vos côtés est identifié comme un meurtrier en cavale, photographié sur l'avis de recherche affiché en gare. Le pousser sauvera les cinq.",
+          labels: { act: "Pousser le meurtrier", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Justice expéditive", title: "Combiner utilité et désert",
+              text: "Vous combinez l'arithmétique (un contre cinq) avec la rétribution (un coupable mérite). Beaucoup trouvent ce choix plus facile que le pont standard. Mais agir comme bourreau sans procès dans une démocratie ? La justice expéditive est précisément ce que l'État de droit a remplacé — et l'identification sur affiche s'est déjà trompée souvent.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Présomption de droits", title: "Pas de peine sans procès",
+              text: "Même un criminel garde des droits procéduraux. Sa culpabilité n'a pas été établie par un juge. Et même condamné, son sort relève de la justice, pas d'un passant. Mais cinq autres meurent à cause de votre respect des formes.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        sauveur: {
+          name: "L'homme qui vous a sauvé la vie",
+          tagline: "Trahir une dette",
+          intro: "L'homme corpulent à vos côtés vous a sauvé la vie il y a dix ans en plongeant dans une rivière gelée pour vous tirer de la noyade. Sa masse peut arrêter le tramway.",
+          labels: { act: "Pousser votre sauveur", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Impartialité totale", title: "Aucun lien ne compte plus",
+              text: "Vous mettez la gratitude de côté pour le bien collectif. Position cohérente avec l'impartialité morale, mais c'est un déchirement profond : on trahit ce qui a fondé notre propre survie.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Devoirs de gratitude", title: "La dette compte moralement",
+              text: "La dette de reconnaissance est un fondement moral réel — Cicéron, Aristote la placent au cœur de la justice. Sacrifier votre sauveur, c'est tuer quelque chose en vous. Mais cinq personnes meurent à cause de votre histoire personnelle.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        volontaire: {
+          name: "Le sacrifice ambigu",
+          tagline: "Le consentement retiré",
+          intro: "L'homme corpulent comprend la situation et vous dit : « Poussez-moi, sauvez-les. » Puis, au dernier instant, il vous regarde et murmure : « Non, attendez... »",
+          labels: { act: "Pousser quand même", wait: "Respecter sa volte-face" },
+          outcomes: {
+            act: { tag: "Consentement initial", title: "Sa première parole compte",
+              text: "Vous tenez son consentement initial comme valide. Mais l'autonomie n'est-elle pas définie par la capacité de changer d'avis ? Le « non » tardif a-t-il moins de poids que le « oui » donné dans l'urgence ?",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Autonomie jusqu'au bout", title: "Le dernier mot l'emporte",
+              text: "Le consentement doit être maintenu jusqu'à l'instant de l'acte — c'est le principe fondamental de la bioéthique moderne. Son ultime parole est sa volonté véritable. Mais cinq meurent à cause d'une hésitation de quelques secondes.",
+              deaths: 5, saved: 0 }
+          }
         }
       }
     },
-    loop: {
+
+    boucle: {
       name: "La boucle",
-      hint: "Thomson (1976)",
-      intro: "La voie déviée fait une boucle qui revient sur la voie principale. Sans la personne attachée sur la voie déviée, le tramway terminerait sa boucle et tuerait quand même les cinq. C'est donc le corps de cette personne qui arrête le tramway.",
-      labels: { act: "Tirer le levier", wait: "Ne rien faire" },
+      theme: "Le corps comme rempart",
+      family: "trolley",
+      sceneVariant: "loop",
       verbsPresent: { act: "Le levier est tiré...", wait: "Personne n'intervient..." },
       verbsAfter: { act: "Le tramway dévie ; le corps stoppera la course.", wait: "Le tramway file vers les cinq." },
-      scene: "trolley", sceneVariant: "loop",
-      outcomes: {
-        act: {
-          tag: "Le moyen déguisé",
-          title: "Quand le levier devient pont",
-          text: "Mathématiquement identique au cas classique. Mais ici la personne unique sert d'instrument pour arrêter le tramway — si elle disparaissait, les cinq mourraient. Thomson construit ce cas pour montrer que la distinction « levier vs pousser » n'est pas aussi nette qu'on le pense : le geste est le même que le classique, mais le rôle moral de la victime change.",
-          deaths: 1, saved: 5
+      variants: {
+        base: {
+          name: "La boucle classique",
+          tagline: "Quand le levier devient pont",
+          intro: "La voie déviée fait une boucle qui revient sur la voie principale. Sans la personne attachée sur la voie déviée, le tramway terminerait sa boucle et tuerait quand même les cinq. C'est donc son corps qui arrête tout.",
+          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Le moyen déguisé", title: "Un geste, deux significations",
+              text: "Mathématiquement identique au levier classique. Mais ici la personne sert d'instrument : si elle disparaissait par magie, les cinq mourraient. Judith Jarvis Thomson construit ce cas en 1976 pour montrer que la distinction « lever vs pousser » n'est pas aussi nette qu'on le pense.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Refus d'instrumentalisation", title: "Le rôle de la victime compte",
+              text: "Accepter le levier classique mais refuser la boucle, c'est percevoir une vraie différence morale entre dommage collatéral et utilisation active. Le bilan numérique est identique, mais le rôle moral de la victime change radicalement.",
+              deaths: 5, saved: 0 }
+          }
         },
-        wait: {
-          tag: "Reconnaître l'usage",
-          title: "Refus d'instrumentalisation",
-          text: "Accepter le levier classique mais refuser la boucle, c'est percevoir la différence morale entre dommage collatéral et utilisation. Le bilan numérique est identique, mais le rôle de la victime change radicalement.",
-          deaths: 5, saved: 0
+        proche: {
+          name: "Votre frère sur la boucle",
+          tagline: "Le lien et le moyen, cumulés",
+          intro: "La voie déviée boucle. La personne attachée — dont le corps stoppera le tramway — est votre frère.",
+          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Impartialité de fer", title: "Le lien ne change rien",
+              text: "Vous appliquez l'impartialité jusqu'à utiliser activement le corps de votre frère comme rempart. Position philosophiquement cohérente, mais humainement quasi impossible — et révélatrice : si on s'y refuse, c'est qu'on admet que tous les jugements moraux n'ont pas la même portée selon les personnes concernées.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Lien et tabou", title: "Deux raisons de refuser",
+              text: "Ici se cumulent deux barrières morales : un proche, et le fait d'utiliser un corps comme outil. Refuser semble presque évident — et pourtant cinq personnes meurent, dont peut-être les proches d'autres familles aussi déchirées que la vôtre.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        inversion: {
+          name: "Les escrocs et l'humanitaire",
+          tagline: "Inverser les rôles moraux",
+          intro: "Sur la voie principale, cinq escrocs financiers condamnés à de lourdes peines. Sur la boucle, une humanitaire qui a sauvé des milliers de vies en zone de guerre.",
+          labels: { act: "Sacrifier l'humanitaire", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Utilitarisme aveugle", title: "Cinq, c'est cinq",
+              text: "Vous appliquez strictement le calcul : cinq vaut plus qu'une, indépendamment du mérite ou de la trajectoire. Mais ici, le résultat heurte presque tout le monde : sacrifier une sainte pour sauver cinq vauriens semble pervers. Cette intuition révèle que nos jugements ne sont pas purement quantitatifs.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Mérite moral", title: "Le passé pèse",
+              text: "Vous refusez d'inverser la justice morale : les conséquences des actes des escrocs les rattrapent, fût-ce par votre inaction. Intuitif, mais glissant : on commence par « ils sont escrocs », on termine par « ils sont indignes de vivre ».",
+              deaths: 5, saved: 0 }
+          }
+        },
+        terminal: {
+          name: "Le condamné par la maladie",
+          tagline: "Une vie déjà éteinte ?",
+          intro: "La voie déviée boucle. La personne dont le corps arrêtera le tramway est en phase terminale d'une maladie : il lui reste deux semaines à vivre.",
+          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Calcul des années", title: "Sacrifier ce qui s'éteint déjà",
+              text: "L'utilitarisme prospectif : presque aucun futur perdu d'un côté, des décennies de l'autre. Logique invoquée en triage médical d'urgence. Mais utiliser activement quelqu'un parce qu'il va bientôt mourir reste une instrumentalisation — et qui détermine quand une vie compte « moins » ?",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Égalité jusqu'au dernier souffle", title: "Ces deux semaines comptent",
+              text: "Une vie reste une vie jusqu'à son dernier instant. Le droit ne distingue pas selon l'espérance de vie. Mais vous laissez cinq personnes — avec des décennies devant elles — mourir pour préserver quatorze jours d'agonie.",
+              deaths: 5, saved: 0 }
+          }
         }
       }
     },
-    transplant: {
+
+    medecin: {
       name: "Le médecin",
-      hint: "Cinq organes, un donneur",
-      intro: "Vous êtes médecin. Cinq patients vont mourir, chacun par défaillance d'un organe différent. Un patient en bonne santé entre pour un examen de routine : ses cinq organes pourraient sauver les cinq autres. Bilan : une vie contre cinq.",
-      labels: { act: "Prélever les organes", wait: "Ne rien faire" },
+      theme: "Utilitarisme médical",
+      family: "hospital",
+      sceneVariant: null,
       verbsPresent: { act: "L'opération est pratiquée...", wait: "Aucune intervention..." },
       verbsAfter: { act: "Le patient sain meurt ; cinq sont sauvés.", wait: "Les cinq s'éteignent faute d'organes." },
-      scene: "hospital", sceneVariant: null,
-      outcomes: {
-        act: {
-          tag: "Utilitarisme strict",
-          title: "Le calcul appliqué jusqu'au bout",
-          text: "Presque personne n'accepte ce scénario, même parmi ceux qui tirent le levier sans hésiter. Pourtant l'arithmétique est strictement la même. Cette quasi-unanimité du refus est un argument classique contre l'utilitarisme pur : si seul le bilan comptait, ce choix devrait sembler évident.",
-          deaths: 1, saved: 5
+      variants: {
+        base: {
+          name: "Cinq organes, un donneur",
+          tagline: "L'utilitarisme jusqu'à l'absurde",
+          intro: "Vous êtes médecin. Cinq patients vont mourir, chacun par défaillance d'un organe différent. Un patient sain entre pour un examen de routine : ses cinq organes pourraient sauver les cinq autres.",
+          labels: { act: "Prélever les organes", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Utilitarisme strict", title: "Le calcul appliqué jusqu'au bout",
+              text: "Presque personne n'accepte ce scénario, même parmi ceux qui tirent le levier sans hésiter. Pourtant l'arithmétique est strictement la même (un contre cinq). Cette quasi-unanimité du refus est un argument classique contre l'utilitarisme pur : si seul le bilan comptait, ce choix devrait sembler évident.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Droits inviolables", title: "Aucun bénéfice n'autorise",
+              text: "Refuser, c'est affirmer qu'il existe des droits — sur son corps, sa vie — qu'aucun bénéfice collectif ne peut renverser. Sans cette barrière, qui irait encore consulter un médecin ? La confiance médicale repose précisément sur cet interdit absolu.",
+              deaths: 5, saved: 0 }
+          }
         },
-        wait: {
-          tag: "Les droits comme barrière",
-          title: "Ce qu'aucun bénéfice n'autorise",
-          text: "Refuser ici, c'est affirmer qu'il existe des droits — sur son corps, sa vie — qu'aucun bénéfice collectif ne peut renverser. C'est l'argument déontologique fort : certaines actions sont interdites quelles que soient leurs conséquences. Sans cette barrière, qui irait encore chez le médecin ?",
-          deaths: 5, saved: 0
+        condamne: {
+          name: "Le détenu en sursis",
+          tagline: "Un condamné devient-il donneur ?",
+          intro: "Le patient sain est un condamné à mort en sursis, dans un pays où la peine capitale existe. Légalement, sa vie est déjà « perdue ». Médicalement, ses organes sauveraient les cinq.",
+          labels: { act: "Prélever les organes", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Le mort sursitaire", title: "Sa vie est déjà condamnée",
+              text: "Argument utilitariste renforcé : sa mort est imminente. Ses organes peuvent au moins servir. Mais transformer la justice en pourvoyeuse d'organes ? C'est le fondement d'une dystopie — et de pratiques historiques bien réelles, documentées en Chine sur des prisonniers exécutés.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Pas de double peine", title: "La condamnation ne donne pas le corps",
+              text: "Une peine de mort, si juste soit-elle, ne transforme pas le corps en ressource publique. C'est précisément la pente glissante que toutes les conventions internationales redoutent. Le condamné reste sujet de droits jusqu'à son exécution légale.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        enfants: {
+          name: "Cinq enfants malades",
+          tagline: "L'âge change-t-il le calcul ?",
+          intro: "Vous êtes médecin. Cinq enfants de huit ans vont mourir, chacun par défaillance d'un organe. Un adulte sain entre pour un examen : ses organes pourraient les sauver.",
+          labels: { act: "Prélever les organes", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Années sauvées au maximum", title: "Cinq vies entières devant elles",
+              text: "L'utilitarisme prospectif appliqué : cinq enfants représentent environ trois cents années de vie potentielles, contre une cinquantaine pour l'adulte. Le « gain » est massif. Pourtant l'horreur de tuer un innocent pour ses organes ne disparaît pas, même multipliée.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Inviolabilité même multipliée", title: "Le nombre ne crée pas le droit",
+              text: "Aucun nombre ne convertit un meurtre en acte médical. Cinq enfants morts est tragique, mais cela n'autorise pas à tuer un adulte sain. La barrière déontologique tient face à l'arithmétique — et c'est précisément ce qui la rend précieuse.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        ami: {
+          name: "Votre ami en consultation",
+          tagline: "Et si le donneur vous était cher ?",
+          intro: "Vous êtes médecin. Cinq patients vont mourir, chacun d'un organe différent. Votre meilleur ami entre dans votre cabinet pour un contrôle. Ses organes sauveraient les cinq.",
+          labels: { act: "Prélever les organes", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "Impartialité héroïque", title: "L'amitié ne change pas le calcul",
+              text: "Position théoriquement cohérente avec l'utilitarisme impartial, mais qui détruirait toute relation humaine durable. Personne n'irait plus jamais consulter un médecin qui peut le sacrifier — et l'institution médicale s'effondre.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Loyauté et tabou médical", title: "Deux remparts",
+              text: "Refuser cumule la loyauté amicale et le serment d'Hippocrate. Mais comme dans toutes les variantes du dilemme du médecin, cinq personnes meurent — et avec elles, leurs amis, leurs liens, leurs vies futures.",
+              deaths: 5, saved: 0 }
+          }
+        },
+        terminal: {
+          name: "Le donneur condamné par la maladie",
+          tagline: "Une vie qui s'éteint déjà",
+          intro: "Le patient sain a en réalité une maladie incurable que vous venez de diagnostiquer (il l'ignore). Il mourra dans six mois. Ses organes encore fonctionnels pourraient sauver les cinq.",
+          labels: { act: "Prélever les organes", wait: "Ne rien faire" },
+          outcomes: {
+            act: { tag: "L'occasion finale", title: "Une mort qui sauve",
+              text: "Argument utilitariste extrême : il va mourir de toute façon, autant que sa mort serve à quelque chose. Mais décider à sa place de la fin de sa vie et de l'usage de son corps ? Vous ne lui avez même pas dit son diagnostic. C'est le paternalisme médical à son comble.",
+              deaths: 1, saved: 5 },
+            wait: { tag: "Autonomie informée", title: "C'est à lui de choisir",
+              text: "Avant toute décision, il a droit à connaître son état et à décider lui-même du don de ses organes. Le paternalisme médical du vingtième siècle est précisément ce que la bioéthique moderne a démonté, pierre par pierre.",
+              deaths: 5, saved: 0 }
+          }
         }
       }
     }
   };
-  const SCENARIO_KEYS = ["classic", "bridge", "loop", "transplant"];
 
-  // ============ STATE ============
+  function getScenario(key) {
+    if (!key || typeof key !== "string") return null;
+    const parts = key.split(":");
+    if (parts.length !== 2) return null;
+    const cat = CATEGORIES[parts[0]];
+    if (!cat) return null;
+    const variant = cat.variants[parts[1]];
+    if (!variant) return null;
+    return {
+      key: key,
+      categoryName: cat.name,
+      variantName: variant.name,
+      family: cat.family,
+      sceneVariant: cat.sceneVariant,
+      intro: variant.intro,
+      labels: variant.labels,
+      verbsPresent: variant.verbsPresent || cat.verbsPresent,
+      verbsAfter: variant.verbsAfter || cat.verbsAfter,
+      outcomes: variant.outcomes
+    };
+  }
+
+  // ===================== STATE =====================
   const socket = io();
-  let myId = null;
-  let myName = null;
-  let currentRoom = null;
-  let lastScenarioKey = null;
-  let lastRevealed = false;
-  let myVote = null;
+  let myId = null, myName = null, currentRoom = null;
+  let lastScenarioKey = null, lastRevealed = false, myVote = null;
   let pendingRevealTimer = null;
 
-  // ============ DOM ============
+  // ===================== DOM =====================
   const $ = id => document.getElementById(id);
-  const lobby = $("lobby");
-  const game = $("game");
-  const hostNameInput = $("host-name");
-  const guestCodeInput = $("guest-code");
-  const guestNameInput = $("guest-name");
+  const lobby = $("lobby"), game = $("game");
+  const hostNameInput = $("host-name"), guestCodeInput = $("guest-code"), guestNameInput = $("guest-name");
   const lobbyError = $("lobby-error");
-  const roomCode = $("room-code");
-  const roundLabel = $("round-label");
+  const roomCode = $("room-code"), roundLabel = $("round-label");
   const playersBar = $("players-bar");
-  const sceneTrolley = $("scene-trolley");
-  const sceneHospital = $("scene-hospital");
+  const sceneTrolley = $("scene-trolley"), sceneHospital = $("scene-hospital");
   const statusLine = $("status-line");
-  const hostBetween = $("host-between");
-  const guestWaiting = $("guest-waiting");
-  const scenarioGrid = $("scenario-grid");
-  const nextRoundNum = $("next-round-num");
+  const hostBetween = $("host-between"), guestWaiting = $("guest-waiting");
+  const scenarioGrid = $("scenario-grid"), nextRoundNum = $("next-round-num");
   const introCard = $("intro-card");
-  const voteControls = $("vote-controls");
-  const btnAct = $("btn-act");
-  const btnWait = $("btn-wait");
+  const voteControls = $("vote-controls"), btnAct = $("btn-act"), btnWait = $("btn-wait");
   const voteConfirm = $("vote-confirm");
-  const hostReveal = $("host-reveal");
-  const hostNext = $("host-next");
+  const hostReveal = $("host-reveal"), hostNext = $("host-next");
   const revealCard = $("reveal-card");
-  const historySection = $("history-section");
-  const historyList = $("history-list");
+  const historySection = $("history-section"), historyList = $("history-list");
 
-  const tram = $("tram");
-  const leverArm = $("lever-arm");
-  const leverKnob = $("lever-knob");
-  const deviatedTrack = $("deviated-track");
-  const leverStation = $("lever-station");
-  const bridgeGroup = $("bridge-group");
-  const bridgeMan = $("bridge-man");
+  const tram = $("tram"), leverArm = $("lever-arm"), leverKnob = $("lever-knob");
+  const deviatedTrack = $("deviated-track"), leverStation = $("lever-station");
+  const bridgeGroup = $("bridge-group"), bridgeMan = $("bridge-man");
   const operator = $("operator");
-  const fivePeople = $("five-people");
-  const onePerson = $("one-person");
-  const loopIndicator = $("loop-indicator");
-  const impactBurst = $("impact-burst");
-  const fivePatients = $("five-patients");
-  const healthyPatient = $("healthy-patient");
+  const fivePeople = $("five-people"), onePerson = $("one-person");
+  const loopIndicator = $("loop-indicator"), impactBurst = $("impact-burst");
+  const fivePatients = $("five-patients"), healthyPatient = $("healthy-patient");
 
-  // ============ HELPERS ============
+  // ===================== HELPERS =====================
   function isHost() {
     if (!currentRoom) return false;
     const me = currentRoom.players.find(p => p.id === myId);
     return me ? me.isHost : false;
   }
-
   function majorityChoice(votes) {
     if (!votes) return null;
     let a = 0, w = 0;
@@ -682,22 +841,17 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
     if (a === 0 && w === 0) return null;
     return a > w ? "act" : "wait";
   }
-
   function show(el) { el.style.display = ""; }
   function hide(el) { el.style.display = "none"; }
-
   function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-    }[c]));
+    return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
   }
 
-  // ============ LOBBY ============
+  // ===================== LOBBY =====================
   function showLobby() {
-    show(lobby);
-    hide(game);
+    show(lobby); hide(game);
     try {
-      const savedName = localStorage.getItem("trolley-name");
+      const savedName = localStorage.getItem("dilemme-name");
       if (savedName) {
         if (!hostNameInput.value) hostNameInput.value = savedName;
         if (!guestNameInput.value) guestNameInput.value = savedName;
@@ -705,48 +859,40 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
     } catch (e) {}
     const params = new URLSearchParams(window.location.search);
     const codeFromUrl = params.get("room");
-    if (codeFromUrl && !guestCodeInput.value) {
-      guestCodeInput.value = codeFromUrl.toUpperCase();
-    }
+    if (codeFromUrl && !guestCodeInput.value) guestCodeInput.value = codeFromUrl.toUpperCase();
   }
-
   $("btn-create").addEventListener("click", () => {
     const name = hostNameInput.value.trim();
     if (!name) { lobbyError.textContent = "Choisissez un pseudo"; return; }
     lobbyError.textContent = "";
-    try { localStorage.setItem("trolley-name", name); } catch (e) {}
-    socket.emit("create-room", name, (res) => {
+    try { localStorage.setItem("dilemme-name", name); } catch (e) {}
+    socket.emit("create-room", name, res => {
       if (res.error) { lobbyError.textContent = res.error; return; }
-      myId = res.myId;
-      myName = name;
+      myId = res.myId; myName = name;
       const url = new URL(window.location);
       url.searchParams.set("room", res.code);
       window.history.replaceState({}, "", url);
     });
   });
-
   $("btn-join").addEventListener("click", () => {
     const code = guestCodeInput.value.trim().toUpperCase();
     const name = guestNameInput.value.trim();
     if (!code || !name) { lobbyError.textContent = "Code et pseudo requis"; return; }
     lobbyError.textContent = "";
-    try { localStorage.setItem("trolley-name", name); } catch (e) {}
-    socket.emit("join-room", { code, name }, (res) => {
+    try { localStorage.setItem("dilemme-name", name); } catch (e) {}
+    socket.emit("join-room", { code, name }, res => {
       if (res.error) { lobbyError.textContent = res.error; return; }
-      myId = res.myId;
-      myName = name;
+      myId = res.myId; myName = name;
       const url = new URL(window.location);
       url.searchParams.set("room", res.code);
       window.history.replaceState({}, "", url);
     });
   });
-
-  // Enter key shortcuts
   hostNameInput.addEventListener("keydown", e => { if (e.key === "Enter") $("btn-create").click(); });
   guestNameInput.addEventListener("keydown", e => { if (e.key === "Enter") $("btn-join").click(); });
   guestCodeInput.addEventListener("keydown", e => { if (e.key === "Enter") guestNameInput.focus(); });
 
-  // ============ GAME ACTIONS ============
+  // ===================== GAME ACTIONS =====================
   $("btn-copy-link").addEventListener("click", () => {
     if (!currentRoom) return;
     const url = new URL(window.location);
@@ -754,106 +900,70 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
     const link = url.toString();
     const btn = $("btn-copy-link");
     const orig = btn.textContent;
-    const setOk = () => {
-      btn.textContent = "✓ Lien copié";
-      setTimeout(() => { btn.textContent = orig; }, 2000);
-    };
+    const setOk = () => { btn.textContent = "✓ Lien copié"; setTimeout(() => btn.textContent = orig, 2000); };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(link).then(setOk).catch(() => prompt("Copiez ce lien :", link));
-    } else {
-      prompt("Copiez ce lien :", link);
-    }
+    } else prompt("Copiez ce lien :", link);
   });
-
-  btnAct.addEventListener("click", () => {
-    if (myVote) return;
-    myVote = "act";
-    socket.emit("vote", "act");
-  });
-  btnWait.addEventListener("click", () => {
-    if (myVote) return;
-    myVote = "wait";
-    socket.emit("vote", "wait");
-  });
+  btnAct.addEventListener("click", () => { if (myVote) return; myVote = "act"; socket.emit("vote", "act"); });
+  btnWait.addEventListener("click", () => { if (myVote) return; myVote = "wait"; socket.emit("vote", "wait"); });
   $("btn-reveal").addEventListener("click", () => socket.emit("reveal"));
   $("btn-next-round").addEventListener("click", () => socket.emit("next-round"));
 
-  // ============ SCENE SWAP ============
-  function showScene(sceneType, variant) {
-    if (sceneType === "hospital") {
-      hide(sceneTrolley);
-      show(sceneHospital);
-      return;
-    }
-    hide(sceneHospital);
-    show(sceneTrolley);
+  // ===================== SCENE SWAP =====================
+  function showScene(family, variant) {
+    if (family === "hospital") { hide(sceneTrolley); show(sceneHospital); return; }
+    hide(sceneHospital); show(sceneTrolley);
     if (variant === "bridge") {
-      deviatedTrack.style.display = "none";
-      leverStation.style.display = "none";
-      operator.style.display = "none";
-      onePerson.style.display = "none";
-      loopIndicator.style.display = "none";
-      bridgeGroup.style.display = "";
+      deviatedTrack.style.display = "none"; leverStation.style.display = "none";
+      operator.style.display = "none"; onePerson.style.display = "none";
+      loopIndicator.style.display = "none"; bridgeGroup.style.display = "";
     } else if (variant === "loop") {
-      deviatedTrack.style.display = "";
-      leverStation.style.display = "";
-      operator.style.display = "";
-      onePerson.style.display = "";
-      bridgeGroup.style.display = "none";
-      loopIndicator.style.display = "";
+      deviatedTrack.style.display = ""; leverStation.style.display = "";
+      operator.style.display = ""; onePerson.style.display = "";
+      bridgeGroup.style.display = "none"; loopIndicator.style.display = "";
     } else {
-      deviatedTrack.style.display = "";
-      leverStation.style.display = "";
-      operator.style.display = "";
-      onePerson.style.display = "";
-      bridgeGroup.style.display = "none";
-      loopIndicator.style.display = "none";
+      deviatedTrack.style.display = ""; leverStation.style.display = "";
+      operator.style.display = ""; onePerson.style.display = "";
+      bridgeGroup.style.display = "none"; loopIndicator.style.display = "none";
     }
   }
-
   function resetScene(scenarioKey) {
-    const sc = SCENARIOS[scenarioKey];
+    const sc = getScenario(scenarioKey);
     if (!sc) return;
-    showScene(sc.scene, sc.sceneVariant);
-
+    showScene(sc.family, sc.sceneVariant);
     tram.style.transition = "none";
     tram.setAttribute("transform", "translate(105, 225)");
     void tram.getBoundingClientRect();
     tram.style.transition = "";
-
     leverArm.setAttribute("transform", "rotate(-25)");
     leverKnob.setAttribute("fill", "#B73B2D");
-
     bridgeMan.style.transition = "none";
     bridgeMan.setAttribute("transform", "translate(400, 150)");
     void bridgeMan.getBoundingClientRect();
     bridgeMan.style.transition = "";
-
     document.querySelectorAll(".victim").forEach(v => v.classList.remove("fallen"));
     impactBurst.classList.remove("show");
     const qm = $("question-mark"); if (qm) qm.style.opacity = "1";
     const qm2 = $("question-mark-2"); if (qm2) qm2.style.opacity = "1";
   }
 
-  // ============ ANIMATIONS ============
+  // ===================== ANIMATIONS =====================
   function showImpactBurst(x, y) {
     impactBurst.setAttribute("transform", "translate(" + x + ", " + y + ")");
     impactBurst.classList.remove("show");
     void impactBurst.getBoundingClientRect();
     impactBurst.classList.add("show");
   }
-
   function playAnimation(scenarioKey, choice) {
-    const sc = SCENARIOS[scenarioKey];
+    const sc = getScenario(scenarioKey);
     if (!sc) return;
     const qm = $("question-mark"); if (qm) qm.style.opacity = "0";
     const qm2 = $("question-mark-2"); if (qm2) qm2.style.opacity = "0";
-
-    if (sc.scene === "hospital") return playHospitalAnimation(sc, choice);
+    if (sc.family === "hospital") return playHospitalAnimation(sc, choice);
     if (sc.sceneVariant === "bridge") return playBridgeAnimation(sc, choice);
     return playTrolleyAnimation(sc, choice);
   }
-
   function playTrolleyAnimation(sc, choice) {
     if (choice === "act") {
       leverArm.setAttribute("transform", "rotate(30)");
@@ -868,7 +978,7 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
         showImpactBurst(750, 144);
         onePerson.querySelectorAll(".victim").forEach(v => v.classList.add("fallen"));
       }, 2700);
-      setTimeout(() => { statusLine.textContent = "Une personne touchée. Cinq sauvées."; }, 3100);
+      setTimeout(() => statusLine.textContent = "Une personne touchée. Cinq sauvées.", 3100);
     } else {
       statusLine.textContent = sc.verbsPresent.wait;
       setTimeout(() => {
@@ -880,10 +990,9 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
         showImpactBurst(685, 248);
         fivePeople.querySelectorAll(".victim").forEach(v => v.classList.add("fallen"));
       }, 2500);
-      setTimeout(() => { statusLine.textContent = "Cinq personnes touchées."; }, 2900);
+      setTimeout(() => statusLine.textContent = "Cinq personnes touchées.", 2900);
     }
   }
-
   function playBridgeAnimation(sc, choice) {
     if (choice === "act") {
       statusLine.textContent = sc.verbsPresent.act;
@@ -898,7 +1007,7 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
         showImpactBurst(400, 245);
         bridgeMan.classList.add("fallen");
       }, 2600);
-      setTimeout(() => { statusLine.textContent = "Le tramway s'arrête. Cinq sauvées, un mort."; }, 3000);
+      setTimeout(() => statusLine.textContent = "Le tramway s'arrête. Cinq sauvées, un mort.", 3000);
     } else {
       statusLine.textContent = sc.verbsPresent.wait;
       setTimeout(() => {
@@ -910,10 +1019,9 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
         showImpactBurst(685, 248);
         fivePeople.querySelectorAll(".victim").forEach(v => v.classList.add("fallen"));
       }, 2500);
-      setTimeout(() => { statusLine.textContent = "Cinq personnes touchées."; }, 2900);
+      setTimeout(() => statusLine.textContent = "Cinq personnes touchées.", 2900);
     }
   }
-
   function playHospitalAnimation(sc, choice) {
     if (choice === "act") {
       statusLine.textContent = sc.verbsPresent.act;
@@ -930,17 +1038,14 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
     }
   }
 
-  // ============ RENDER ============
+  // ===================== RENDER =====================
   function render(state) {
     if (!state) { showLobby(); return; }
     currentRoom = state;
-    hide(lobby);
-    show(game);
-
+    hide(lobby); show(game);
     roomCode.textContent = state.code;
     roundLabel.textContent = state.round > 0 ? "· Tour " + state.round : "";
 
-    // Players
     playersBar.innerHTML = "";
     state.players.forEach(p => {
       const chip = document.createElement("span");
@@ -954,9 +1059,8 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
     });
 
     const host = isHost();
-    const sc = state.currentScenario ? SCENARIOS[state.currentScenario] : null;
+    const sc = state.currentScenario ? getScenario(state.currentScenario) : null;
 
-    // Scenario change → reset scene
     if (state.currentScenario !== lastScenarioKey) {
       if (state.currentScenario) resetScene(state.currentScenario);
       lastScenarioKey = state.currentScenario;
@@ -964,15 +1068,12 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
       if (pendingRevealTimer) { clearTimeout(pendingRevealTimer); pendingRevealTimer = null; }
     }
 
-    // Sync myVote with server
     if (state.currentScenario && !state.revealed) {
       const me = state.players.find(p => p.id === myId);
       if (!me || !me.hasVoted) myVote = null;
     }
 
-    // === VIEW STATES ===
     if (!state.currentScenario) {
-      // Between rounds
       hide(introCard); hide(voteControls); hide(voteConfirm);
       hide(hostReveal); hide(hostNext); hide(revealCard);
       if (state.round === 0) showScene("trolley", "classic");
@@ -985,10 +1086,15 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
         hide(hostBetween); show(guestWaiting);
       }
     } else if (!state.revealed) {
-      // Voting phase
       hide(hostBetween); hide(guestWaiting); hide(revealCard); hide(hostNext);
       show(introCard);
-      introCard.innerHTML = "<strong>" + escapeHtml(sc.name) + "</strong>" + escapeHtml(sc.intro);
+      introCard.innerHTML =
+        '<span class="intro-title">' +
+          '<span class="cat">' + escapeHtml(sc.categoryName) + '</span>' +
+          '<span class="sep">—</span>' +
+          '<span class="var">' + escapeHtml(sc.variantName) + '</span>' +
+        '</span>' +
+        '<span class="intro-body">' + escapeHtml(sc.intro) + '</span>';
 
       const me = state.players.find(p => p.id === myId);
       const iVoted = me && me.hasVoted;
@@ -1001,20 +1107,23 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
         btnAct.textContent = sc.labels.act;
         btnWait.textContent = sc.labels.wait;
       }
-
       if (host && state.voteCount > 0) show(hostReveal); else hide(hostReveal);
       statusLine.textContent = state.voteCount === state.players.length
         ? "Tous les votes sont enregistrés. L'hôte peut révéler."
         : state.voteCount + " / " + state.players.length + " votes";
     } else {
-      // Revealed
       hide(hostBetween); hide(guestWaiting); hide(voteControls);
       hide(voteConfirm); hide(hostReveal);
       show(introCard);
-      introCard.innerHTML = "<strong>" + escapeHtml(sc.name) + "</strong>" + escapeHtml(sc.intro);
+      introCard.innerHTML =
+        '<span class="intro-title">' +
+          '<span class="cat">' + escapeHtml(sc.categoryName) + '</span>' +
+          '<span class="sep">—</span>' +
+          '<span class="var">' + escapeHtml(sc.variantName) + '</span>' +
+        '</span>' +
+        '<span class="intro-body">' + escapeHtml(sc.intro) + '</span>';
 
       if (!lastRevealed) {
-        // First time seeing reveal → play animation, delay results
         hide(revealCard);
         if (host) hide(hostNext);
         const majority = majorityChoice(state.votes);
@@ -1025,9 +1134,8 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
           show(revealCard);
           if (isHost()) show(hostNext);
           pendingRevealTimer = null;
-        }, sc.scene === "hospital" ? 2200 : 3400);
+        }, sc.family === "hospital" ? 2200 : 3400);
       } else {
-        // Already revealed (late joiner) → show immediately
         renderRevealCard(state, sc);
         show(revealCard);
         if (host) show(hostNext);
@@ -1038,28 +1146,47 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
     if (state.history && state.history.length > 0) {
       show(historySection);
       renderHistory(state.history);
-    } else {
-      hide(historySection);
-    }
+    } else hide(historySection);
   }
 
   function renderScenarioGrid() {
     scenarioGrid.innerHTML = "";
-    SCENARIO_KEYS.forEach(key => {
-      const sc = SCENARIOS[key];
-      const btn = document.createElement("button");
-      btn.className = "scenario-card";
-      btn.innerHTML = "<strong>" + escapeHtml(sc.name) + "</strong><small>" + escapeHtml(sc.hint) + "</small>";
-      btn.addEventListener("click", () => socket.emit("start-round", key));
-      scenarioGrid.appendChild(btn);
+    Object.entries(CATEGORIES).forEach(([catKey, cat]) => {
+      const variantsCount = Object.keys(cat.variants).length;
+      const acc = document.createElement("div");
+      acc.className = "category-accordion";
+
+      const header = document.createElement("button");
+      header.className = "category-header";
+      header.type = "button";
+      header.innerHTML =
+        '<span><strong>' + escapeHtml(cat.name) + '</strong>' +
+        ' <span class="theme">' + escapeHtml(cat.theme) + ' · ' + variantsCount + ' variantes</span></span>' +
+        '<span class="chevron">▶</span>';
+      header.addEventListener("click", () => acc.classList.toggle("open"));
+      acc.appendChild(header);
+
+      const list = document.createElement("div");
+      list.className = "variant-list";
+      Object.entries(cat.variants).forEach(([varKey, v]) => {
+        const btn = document.createElement("button");
+        btn.className = "variant-card";
+        btn.type = "button";
+        btn.innerHTML =
+          '<strong>' + escapeHtml(v.name) + '</strong>' +
+          '<small>' + escapeHtml(v.tagline) + '</small>';
+        btn.addEventListener("click", () => socket.emit("start-round", catKey + ":" + varKey));
+        list.appendChild(btn);
+      });
+      acc.appendChild(list);
+      scenarioGrid.appendChild(acc);
     });
   }
 
   function renderRevealCard(state, sc) {
     const votes = state.votes || {};
     const players = state.players;
-
-    let html = '<h3>Résultats — Tour ' + state.round + '</h3>';
+    let html = '<h3>Résultats — Tour ' + state.round + ' · ' + escapeHtml(sc.categoryName) + ' : ' + escapeHtml(sc.variantName) + '</h3>';
     html += '<div class="votes-list">';
     players.forEach(p => {
       const choice = votes[p.id];
@@ -1067,8 +1194,7 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
       const label = choice === "act" ? sc.labels.act : sc.labels.wait;
       html += '<div class="vote-row ' + choice + '">'
         + '<span><strong>' + escapeHtml(p.name) + '</strong></span>'
-        + '<span class="choice">' + escapeHtml(label) + '</span>'
-        + '</div>';
+        + '<span class="choice">' + escapeHtml(label) + '</span></div>';
     });
     html += '</div>';
 
@@ -1081,16 +1207,14 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
       html += '<div class="philos-block act">'
         + '<span class="philos-tag">' + escapeHtml(o.tag) + '</span>'
         + '<h4>' + escapeHtml(o.title) + '</h4>'
-        + '<p>' + escapeHtml(o.text) + '</p>'
-        + '</div>';
+        + '<p>' + escapeHtml(o.text) + '</p></div>';
     }
     if (counts.wait > 0) {
       const o = sc.outcomes.wait;
       html += '<div class="philos-block wait">'
         + '<span class="philos-tag">' + escapeHtml(o.tag) + '</span>'
         + '<h4>' + escapeHtml(o.title) + '</h4>'
-        + '<p>' + escapeHtml(o.text) + '</p>'
-        + '</div>';
+        + '<p>' + escapeHtml(o.text) + '</p></div>';
     }
     html += '</div>';
 
@@ -1100,17 +1224,15 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
       const label = counts.act === counts.wait ? "majorité par défaut (égalité)" : "choix majoritaire";
       html += '<div class="body-count">'
         + '<span class="deaths"><strong>' + outcome.deaths + '</strong> mort(s) — ' + label + '</span>'
-        + '<span class="saved"><strong>' + outcome.saved + '</strong> sauvée(s)</span>'
-        + '</div>';
+        + '<span class="saved"><strong>' + outcome.saved + '</strong> sauvée(s)</span></div>';
     }
-
     revealCard.innerHTML = html;
   }
 
   function renderHistory(history) {
     historyList.innerHTML = "";
     history.forEach(round => {
-      const sc = SCENARIOS[round.scenario];
+      const sc = getScenario(round.scenario);
       if (!sc) return;
       const div = document.createElement("div");
       div.className = "history-round";
@@ -1120,38 +1242,26 @@ h1 { font-size: 1.9rem; font-weight: normal; letter-spacing: -0.5px; }
         votesHtml += '<li>' + escapeHtml(name) + ' — <em>' + escapeHtml(label) + '</em></li>';
       });
       votesHtml += '</ul>';
-      div.innerHTML = '<h5>Tour ' + round.round + ' — ' + escapeHtml(sc.name) + '</h5>' + votesHtml;
+      div.innerHTML = '<h5>Tour ' + round.round + ' · ' + escapeHtml(sc.categoryName) + ' : ' + escapeHtml(sc.variantName) + '</h5>' + votesHtml;
       historyList.appendChild(div);
     });
   }
 
-  // ============ SOCKET ============
+  // ===================== SOCKET =====================
   socket.on("state", render);
-
   socket.on("disconnect", () => {
-    if (currentRoom) {
-      statusLine.textContent = "⚠ Connexion perdue. Tentative de reconnexion...";
-    }
+    if (currentRoom) statusLine.textContent = "⚠ Connexion perdue. Tentative de reconnexion...";
   });
-
   socket.on("connect", () => {
     if (currentRoom && myId) {
-      // Server was restarted; our room state is lost
-      currentRoom = null;
-      myId = null;
-      lastScenarioKey = null;
-      lastRevealed = false;
-      myVote = null;
+      currentRoom = null; myId = null;
+      lastScenarioKey = null; lastRevealed = false; myVote = null;
       lobbyError.textContent = "Le serveur a redémarré. Recréez ou rejoignez une partie.";
       showLobby();
     }
   });
+  socket.on("connect_error", () => { lobbyError.textContent = "Impossible de joindre le serveur."; });
 
-  socket.on("connect_error", () => {
-    lobbyError.textContent = "Impossible de joindre le serveur.";
-  });
-
-  // Init
   showLobby();
 })();
 </script>
