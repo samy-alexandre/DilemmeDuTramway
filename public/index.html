@@ -111,7 +111,6 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 .host-panel h3 { font-size: 1.1rem; font-weight: normal; margin-bottom: 1rem; font-style: italic; }
 .waiting-panel { text-align: center; color: var(--ink-soft); font-size: 0.95rem; }
 
-/* === ACCORDION (categories & variants) === */
 .category-accordion {
   border: 1px solid var(--ink-faint); border-radius: 4px;
   margin-bottom: 0.6rem; background: var(--paper-warm); overflow: hidden;
@@ -125,7 +124,6 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 .category-header:hover { background: var(--bg); color: var(--ink); }
 .category-header strong { font-weight: normal; }
 .category-header .theme { font-size: 0.82rem; color: var(--ink-soft); font-style: italic; margin-left: 0.5rem; }
-.category-header:hover .theme { color: var(--ink-soft); }
 .category-header .chevron { transition: transform 0.2s; color: var(--ink-faint); font-size: 0.8rem; }
 .category-accordion.open .chevron { transform: rotate(90deg); }
 .variant-list {
@@ -144,7 +142,6 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 .variant-card small { display: block; font-size: 0.78rem; opacity: 0.7; font-style: italic; }
 .variant-card:hover small { opacity: 0.85; }
 
-/* === REVEAL === */
 .reveal-card {
   background: var(--paper); border: 1px solid var(--border); border-radius: 6px;
   padding: 1.5rem; margin-bottom: 1rem; animation: fadeIn 0.5s ease;
@@ -201,7 +198,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 }
 .victim.fallen { transform: rotate(82deg); opacity: 0.45; }
 #bridge-man { transition: transform 1.1s cubic-bezier(0.5, 0, 0.7, 1); }
-#question-mark, #question-mark-2 { transition: opacity 0.4s ease; }
+#question-mark, #question-mark-2, #question-mark-3 { transition: opacity 0.4s ease; }
 .impact-burst { opacity: 0; transform-box: fill-box; transform-origin: center center; }
 .impact-burst.show { animation: burst 0.55s ease-out forwards; }
 @keyframes burst {
@@ -209,6 +206,13 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
   35% { opacity: 1; transform: scale(1.2); }
   100% { opacity: 0; transform: scale(1.9); }
 }
+
+/* Abstract scene */
+.choice-sphere { transition: stroke 0.5s, stroke-width 0.5s, opacity 0.5s; }
+.choice-sphere.chosen { stroke: var(--accent-red); stroke-width: 3; stroke-dasharray: none; opacity: 1; }
+.choice-sphere.unchosen { opacity: 0.3; }
+.abstract-arrow { opacity: 0; transition: opacity 0.5s; }
+.abstract-arrow.show { opacity: 1; }
 
 @media (max-width: 640px) {
   h1 { font-size: 1.5rem; }
@@ -253,6 +257,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 
     <div class="players-bar" id="players-bar"></div>
 
+    <!-- TROLLEY SCENE -->
     <div class="scene" id="scene-trolley">
       <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
         <line x1="0" y1="312" x2="900" y2="312" stroke="#9A938A" stroke-width="0.5" stroke-dasharray="3,5"/>
@@ -267,11 +272,6 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
             <path d="M 390 235 Q 470 230 520 195 Q 575 155 620 130 L 870 130"/>
             <path d="M 390 265 Q 480 265 540 225 Q 595 185 645 160 L 870 160"/>
           </g>
-        </g>
-        <g id="loop-indicator" style="display:none">
-          <path d="M 870 145 Q 895 145 895 200 Q 895 262 870 262" fill="none" stroke="#5C544A" stroke-width="3.5" stroke-dasharray="5,4"/>
-          <path d="M 880 256 L 870 262 L 880 270" fill="none" stroke="#5C544A" stroke-width="2.5" stroke-linecap="round"/>
-          <text x="895" y="205" text-anchor="middle" font-size="10" fill="#4A453F" font-style="italic" transform="rotate(90 895 205)">la boucle</text>
         </g>
         <g stroke="#9B7B54" stroke-width="4">
           <line x1="40" y1="235" x2="40" y2="290"/><line x1="80" y1="235" x2="80" y2="290"/>
@@ -367,6 +367,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
       </svg>
     </div>
 
+    <!-- HOSPITAL SCENE -->
     <div class="scene" id="scene-hospital" style="display:none">
       <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
         <line x1="0" y1="312" x2="900" y2="312" stroke="#9A938A" stroke-width="0.5" stroke-dasharray="3,5"/>
@@ -377,38 +378,17 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           <rect x="-13" y="-3" width="26" height="6" fill="#B73B2D"/>
         </g>
         <g id="five-patients">
-          <g transform="translate(450, 270)">
-            <rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/>
-            <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
-            <g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g>
-          </g>
-          <g transform="translate(540, 270)">
-            <rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/>
-            <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
-            <g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g>
-          </g>
-          <g transform="translate(630, 270)">
-            <rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/>
-            <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
-            <g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g>
-          </g>
-          <g transform="translate(495, 200)">
-            <rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/>
-            <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
-            <g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g>
-          </g>
-          <g transform="translate(585, 200)">
-            <rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/>
-            <rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
-            <g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g>
-          </g>
+          <g transform="translate(450, 270)"><rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/><rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/><g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g></g>
+          <g transform="translate(540, 270)"><rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/><rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/><g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g></g>
+          <g transform="translate(630, 270)"><rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/><rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/><g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g></g>
+          <g transform="translate(495, 200)"><rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/><rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/><g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g></g>
+          <g transform="translate(585, 200)"><rect x="-3" y="0" width="76" height="32" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" rx="2"/><rect x="-3" y="-12" width="14" height="14" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/><g class="victim"><circle cx="14" cy="0" r="6" fill="#1F1B18"/><rect x="20" y="4" width="48" height="11" rx="3" fill="#1F1B18"/></g></g>
           <text x="585" y="325" text-anchor="middle" font-size="13" fill="#4A453F" font-style="italic">cinq patients en attente d'organes</text>
         </g>
         <g id="healthy-patient">
           <g class="victim" transform="translate(180, 285)">
             <circle cx="0" cy="-50" r="11" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
-            <circle cx="-3" cy="-52" r="1.2" fill="#1F1B18"/>
-            <circle cx="3" cy="-52" r="1.2" fill="#1F1B18"/>
+            <circle cx="-3" cy="-52" r="1.2" fill="#1F1B18"/><circle cx="3" cy="-52" r="1.2" fill="#1F1B18"/>
             <path d="M -3 -46 Q 0 -45 3 -46" fill="none" stroke="#1F1B18" stroke-width="1.2"/>
             <rect x="-10" y="-39" width="20" height="35" rx="3" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
             <line x1="-10" y1="-25" x2="-22" y2="-10" stroke="#1F1B18" stroke-width="2.5" stroke-linecap="round"/>
@@ -421,8 +401,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
         <g id="doctor" transform="translate(360, 215)">
           <text id="question-mark-2" x="-22" y="-22" font-size="26" fill="#B73B2D" font-weight="bold">?</text>
           <circle cx="0" cy="0" r="11" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
-          <circle cx="-3" cy="-2" r="1.2" fill="#1F1B18"/>
-          <circle cx="3" cy="-2" r="1.2" fill="#1F1B18"/>
+          <circle cx="-3" cy="-2" r="1.2" fill="#1F1B18"/><circle cx="3" cy="-2" r="1.2" fill="#1F1B18"/>
           <path d="M -3 4 Q 0 5.5 3 4" fill="none" stroke="#1F1B18" stroke-width="1.2"/>
           <path d="M -14 12 L -18 75 L 18 75 L 14 12 Z" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2"/>
           <line x1="0" y1="12" x2="0" y2="75" stroke="#1F1B18" stroke-width="1.5"/>
@@ -430,6 +409,59 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           <circle cx="6" cy="46" r="3" fill="#1F1B18"/>
           <line x1="-14" y1="18" x2="-26" y2="45" stroke="#1F1B18" stroke-width="2.5" stroke-linecap="round"/>
           <line x1="14" y1="18" x2="26" y2="45" stroke="#1F1B18" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- ABSTRACT SCENE (argent, famille, guerre) -->
+    <div class="scene" id="scene-abstract" style="display:none">
+      <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="312" x2="900" y2="312" stroke="#9A938A" stroke-width="0.5" stroke-dasharray="3,5"/>
+
+        <text id="abstract-category-label" x="450" y="40" text-anchor="middle" font-size="14" letter-spacing="5" fill="#1F1B18"></text>
+        <line id="abstract-cat-divider" x1="370" y1="55" x2="530" y2="55" stroke="#1F1B18" stroke-width="0.8"/>
+
+        <g id="abstract-left-sphere">
+          <circle class="choice-sphere" id="abstract-left-circle" cx="200" cy="195" r="80" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" stroke-dasharray="6,4" opacity="0.75"/>
+          <text x="200" y="195" text-anchor="middle" font-size="14" fill="#1F1B18">
+            <tspan id="abstract-left-text-1" x="200" dy="-7"></tspan>
+            <tspan id="abstract-left-text-2" x="200" dy="16"></tspan>
+            <tspan id="abstract-left-text-3" x="200" dy="16"></tspan>
+          </text>
+        </g>
+
+        <g id="abstract-right-sphere">
+          <circle class="choice-sphere" id="abstract-right-circle" cx="700" cy="195" r="80" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2" stroke-dasharray="6,4" opacity="0.75"/>
+          <text x="700" y="195" text-anchor="middle" font-size="14" fill="#1F1B18">
+            <tspan id="abstract-right-text-1" x="700" dy="-7"></tspan>
+            <tspan id="abstract-right-text-2" x="700" dy="16"></tspan>
+            <tspan id="abstract-right-text-3" x="700" dy="16"></tspan>
+          </text>
+        </g>
+
+        <line x1="282" y1="195" x2="405" y2="195" stroke="#9A938A" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="495" y1="195" x2="618" y2="195" stroke="#9A938A" stroke-width="1" stroke-dasharray="3,4"/>
+
+        <g id="abstract-arrow-left" class="abstract-arrow">
+          <line x1="400" y1="195" x2="290" y2="195" stroke="#B73B2D" stroke-width="3"/>
+          <polyline points="303,185 290,195 303,205" fill="none" stroke="#B73B2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g id="abstract-arrow-right" class="abstract-arrow">
+          <line x1="500" y1="195" x2="610" y2="195" stroke="#B73B2D" stroke-width="3"/>
+          <polyline points="597,185 610,195 597,205" fill="none" stroke="#B73B2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <g id="abstract-operator" transform="translate(450, 220)">
+          <text id="question-mark-3" x="-25" y="-95" font-size="36" fill="#B73B2D" font-weight="bold">?</text>
+          <circle cx="0" cy="-55" r="16" fill="#FBF7EC" stroke="#1F1B18" stroke-width="2.5"/>
+          <circle cx="-5" cy="-57" r="1.5" fill="#1F1B18"/>
+          <circle cx="5" cy="-57" r="1.5" fill="#1F1B18"/>
+          <path d="M -4 -50 Q 0 -48 4 -50" fill="none" stroke="#1F1B18" stroke-width="1.5"/>
+          <line x1="0" y1="-39" x2="0" y2="40" stroke="#1F1B18" stroke-width="3"/>
+          <line x1="0" y1="-20" x2="-30" y2="10" stroke="#1F1B18" stroke-width="3" stroke-linecap="round"/>
+          <line x1="0" y1="-20" x2="30" y2="10" stroke="#1F1B18" stroke-width="3" stroke-linecap="round"/>
+          <line x1="0" y1="40" x2="-12" y2="80" stroke="#1F1B18" stroke-width="3" stroke-linecap="round"/>
+          <line x1="0" y1="40" x2="12" y2="80" stroke="#1F1B18" stroke-width="3" stroke-linecap="round"/>
         </g>
       </svg>
     </div>
@@ -475,19 +507,15 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 <script>
 (function() {
   // ===================== DATA =====================
-  // Categories share scene + animation verbs. Variants override intro, labels, philosophy.
   const CATEGORIES = {
     lever: {
-      name: "Le levier",
-      theme: "Action vs inaction",
-      family: "trolley",
-      sceneVariant: "classic",
+      name: "Le levier", theme: "Action vs inaction",
+      family: "trolley", sceneVariant: "classic",
       verbsPresent: { act: "Le levier est tiré...", wait: "Personne n'intervient..." },
       verbsAfter: { act: "Le tramway dévie vers la voie unique.", wait: "Le tramway file vers les cinq." },
       variants: {
         base: {
-          name: "Le test classique",
-          tagline: "Cinq inconnus, un inconnu",
+          name: "Le test classique", tagline: "Cinq inconnus, un inconnu",
           intro: "Un tramway fonce vers cinq inconnus attachés sur la voie. Tirer le levier le dévie vers une voie où un seul inconnu est attaché.",
           labels: { act: "Tirer le levier", wait: "Ne rien faire" },
           outcomes: {
@@ -500,8 +528,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         jeunesse: {
-          name: "La jeunesse contre la vieillesse",
-          tagline: "Toutes les années valent-elles pareil ?",
+          name: "La jeunesse contre la vieillesse", tagline: "Toutes les années valent-elles pareil ?",
           intro: "Sur la voie principale, cinq étudiants de vingt ans qui ont toute la vie devant eux. Sur la voie déviée, un homme de quatre-vingt-cinq ans en fin de vie.",
           labels: { act: "Sacrifier le vieillard", wait: "Ne rien faire" },
           outcomes: {
@@ -514,8 +541,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         proche: {
-          name: "Votre enfant sur la voie",
-          tagline: "L'impartialité, jusqu'où ?",
+          name: "Votre enfant sur la voie", tagline: "L'impartialité, jusqu'où ?",
           intro: "Sur la voie principale, cinq inconnus. Sur la voie déviée, votre propre enfant.",
           labels: { act: "Tirer le levier (tuer votre enfant)", wait: "Ne rien faire" },
           outcomes: {
@@ -528,8 +554,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         tyran: {
-          name: "Le tyran déchu",
-          tagline: "Le bourreau improvisé",
+          name: "Le tyran déchu", tagline: "Le bourreau improvisé",
           intro: "Sur la voie principale, cinq inconnus. Sur la voie déviée, un dictateur déchu reconnu coupable du génocide de millions de personnes.",
           labels: { act: "Tirer le levier", wait: "Ne rien faire" },
           outcomes: {
@@ -542,8 +567,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         chercheuse: {
-          name: "La chercheuse en oncologie",
-          tagline: "Une vie « utile » vaut-elle plus ?",
+          name: "La chercheuse en oncologie", tagline: "Une vie « utile » vaut-elle plus ?",
           intro: "Sur la voie principale, cinq ouvriers du bâtiment. Sur la voie déviée, une chercheuse sur le point de découvrir un traitement majeur contre le cancer.",
           labels: { act: "Sacrifier la chercheuse", wait: "Ne rien faire" },
           outcomes: {
@@ -559,16 +583,13 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
     },
 
     bridge: {
-      name: "Le pont",
-      theme: "Utiliser un corps comme moyen",
-      family: "trolley",
-      sceneVariant: "bridge",
+      name: "Le pont", theme: "Utiliser un corps comme moyen",
+      family: "trolley", sceneVariant: "bridge",
       verbsPresent: { act: "L'homme est poussé du pont...", wait: "Personne ne bouge..." },
       verbsAfter: { act: "Le tramway s'écrase contre lui.", wait: "Le tramway file vers les cinq." },
       variants: {
         base: {
-          name: "Le pousseur",
-          tagline: "Pousser un corps inconnu",
+          name: "Le pousseur", tagline: "Pousser un corps inconnu",
           intro: "Sur un pont au-dessus de la voie, un homme corpulent que vous ne connaissez pas. Sa masse peut arrêter le tramway et sauver les cinq.",
           labels: { act: "Pousser l'homme", wait: "Ne rien faire" },
           outcomes: {
@@ -576,13 +597,12 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
               text: "Bilan identique au levier — pourtant seuls dix pour cent des gens choisissent de pousser. Le corps de la victime n'est plus collatéral : il devient l'instrument du sauvetage. Doctrine du double effet (Thomas d'Aquin) : la mort comme moyen pèse plus lourd que la mort comme effet secondaire. Joshua Greene a montré par IRM que ce scénario active les zones cérébrales émotionnelles, là où le levier active les zones du calcul rationnel.",
               deaths: 1, saved: 5 },
             wait: { tag: "Le tabou de l'usage", title: "Ne pas toucher l'innocent",
-              text: "On ne touche pas physiquement à un innocent pour en sauver d'autres. Cette intuition très stable révèle que nos jugements moraux ne sont pas purement utilitaires : la manière compte autant que le résultat. La même arithmétique ne produit pas la même réponse selon le geste.",
+              text: "On ne touche pas physiquement à un innocent pour en sauver d'autres. Cette intuition très stable révèle que nos jugements moraux ne sont pas purement utilitaires : la manière compte autant que le résultat.",
               deaths: 5, saved: 0 }
           }
         },
         criminel: {
-          name: "Le meurtrier reconnu",
-          tagline: "Pousser un coupable",
+          name: "Le meurtrier reconnu", tagline: "Pousser un coupable",
           intro: "L'homme corpulent à vos côtés est identifié comme un meurtrier en cavale, photographié sur l'avis de recherche affiché en gare. Le pousser sauvera les cinq.",
           labels: { act: "Pousser le meurtrier", wait: "Ne rien faire" },
           outcomes: {
@@ -595,8 +615,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         sauveur: {
-          name: "L'homme qui vous a sauvé la vie",
-          tagline: "Trahir une dette",
+          name: "L'homme qui vous a sauvé la vie", tagline: "Trahir une dette",
           intro: "L'homme corpulent à vos côtés vous a sauvé la vie il y a dix ans en plongeant dans une rivière gelée pour vous tirer de la noyade. Sa masse peut arrêter le tramway.",
           labels: { act: "Pousser votre sauveur", wait: "Ne rien faire" },
           outcomes: {
@@ -609,8 +628,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         volontaire: {
-          name: "Le sacrifice ambigu",
-          tagline: "Le consentement retiré",
+          name: "Le sacrifice ambigu", tagline: "Le consentement retiré",
           intro: "L'homme corpulent comprend la situation et vous dit : « Poussez-moi, sauvez-les. » Puis, au dernier instant, il vous regarde et murmure : « Non, attendez... »",
           labels: { act: "Pousser quand même", wait: "Respecter sa volte-face" },
           outcomes: {
@@ -625,84 +643,14 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
       }
     },
 
-    boucle: {
-      name: "La boucle",
-      theme: "Le corps comme rempart",
-      family: "trolley",
-      sceneVariant: "loop",
-      verbsPresent: { act: "Le levier est tiré...", wait: "Personne n'intervient..." },
-      verbsAfter: { act: "Le tramway dévie ; le corps stoppera la course.", wait: "Le tramway file vers les cinq." },
-      variants: {
-        base: {
-          name: "La boucle classique",
-          tagline: "Quand le levier devient pont",
-          intro: "La voie déviée fait une boucle qui revient sur la voie principale. Sans la personne attachée sur la voie déviée, le tramway terminerait sa boucle et tuerait quand même les cinq. C'est donc son corps qui arrête tout.",
-          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
-          outcomes: {
-            act: { tag: "Le moyen déguisé", title: "Un geste, deux significations",
-              text: "Mathématiquement identique au levier classique. Mais ici la personne sert d'instrument : si elle disparaissait par magie, les cinq mourraient. Judith Jarvis Thomson construit ce cas en 1976 pour montrer que la distinction « lever vs pousser » n'est pas aussi nette qu'on le pense.",
-              deaths: 1, saved: 5 },
-            wait: { tag: "Refus d'instrumentalisation", title: "Le rôle de la victime compte",
-              text: "Accepter le levier classique mais refuser la boucle, c'est percevoir une vraie différence morale entre dommage collatéral et utilisation active. Le bilan numérique est identique, mais le rôle moral de la victime change radicalement.",
-              deaths: 5, saved: 0 }
-          }
-        },
-        proche: {
-          name: "Votre frère sur la boucle",
-          tagline: "Le lien et le moyen, cumulés",
-          intro: "La voie déviée boucle. La personne attachée — dont le corps stoppera le tramway — est votre frère.",
-          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
-          outcomes: {
-            act: { tag: "Impartialité de fer", title: "Le lien ne change rien",
-              text: "Vous appliquez l'impartialité jusqu'à utiliser activement le corps de votre frère comme rempart. Position philosophiquement cohérente, mais humainement quasi impossible — et révélatrice : si on s'y refuse, c'est qu'on admet que tous les jugements moraux n'ont pas la même portée selon les personnes concernées.",
-              deaths: 1, saved: 5 },
-            wait: { tag: "Lien et tabou", title: "Deux raisons de refuser",
-              text: "Ici se cumulent deux barrières morales : un proche, et le fait d'utiliser un corps comme outil. Refuser semble presque évident — et pourtant cinq personnes meurent, dont peut-être les proches d'autres familles aussi déchirées que la vôtre.",
-              deaths: 5, saved: 0 }
-          }
-        },
-        inversion: {
-          name: "Les escrocs et l'humanitaire",
-          tagline: "Inverser les rôles moraux",
-          intro: "Sur la voie principale, cinq escrocs financiers condamnés à de lourdes peines. Sur la boucle, une humanitaire qui a sauvé des milliers de vies en zone de guerre.",
-          labels: { act: "Sacrifier l'humanitaire", wait: "Ne rien faire" },
-          outcomes: {
-            act: { tag: "Utilitarisme aveugle", title: "Cinq, c'est cinq",
-              text: "Vous appliquez strictement le calcul : cinq vaut plus qu'une, indépendamment du mérite ou de la trajectoire. Mais ici, le résultat heurte presque tout le monde : sacrifier une sainte pour sauver cinq vauriens semble pervers. Cette intuition révèle que nos jugements ne sont pas purement quantitatifs.",
-              deaths: 1, saved: 5 },
-            wait: { tag: "Mérite moral", title: "Le passé pèse",
-              text: "Vous refusez d'inverser la justice morale : les conséquences des actes des escrocs les rattrapent, fût-ce par votre inaction. Intuitif, mais glissant : on commence par « ils sont escrocs », on termine par « ils sont indignes de vivre ».",
-              deaths: 5, saved: 0 }
-          }
-        },
-        terminal: {
-          name: "Le condamné par la maladie",
-          tagline: "Une vie déjà éteinte ?",
-          intro: "La voie déviée boucle. La personne dont le corps arrêtera le tramway est en phase terminale d'une maladie : il lui reste deux semaines à vivre.",
-          labels: { act: "Tirer le levier", wait: "Ne rien faire" },
-          outcomes: {
-            act: { tag: "Calcul des années", title: "Sacrifier ce qui s'éteint déjà",
-              text: "L'utilitarisme prospectif : presque aucun futur perdu d'un côté, des décennies de l'autre. Logique invoquée en triage médical d'urgence. Mais utiliser activement quelqu'un parce qu'il va bientôt mourir reste une instrumentalisation — et qui détermine quand une vie compte « moins » ?",
-              deaths: 1, saved: 5 },
-            wait: { tag: "Égalité jusqu'au dernier souffle", title: "Ces deux semaines comptent",
-              text: "Une vie reste une vie jusqu'à son dernier instant. Le droit ne distingue pas selon l'espérance de vie. Mais vous laissez cinq personnes — avec des décennies devant elles — mourir pour préserver quatorze jours d'agonie.",
-              deaths: 5, saved: 0 }
-          }
-        }
-      }
-    },
-
     medecin: {
-      name: "Le médecin",
-      theme: "Utilitarisme médical",
-      family: "hospital",
-      sceneVariant: null,
+      name: "Le médecin", theme: "Utilitarisme médical",
+      family: "hospital", sceneVariant: null,
       verbsPresent: { act: "L'opération est pratiquée...", wait: "Aucune intervention..." },
       verbsAfter: { act: "Le patient sain meurt ; cinq sont sauvés.", wait: "Les cinq s'éteignent faute d'organes." },
       variants: {
         base: {
-          name: "Cinq organes, un donneur",
-          tagline: "L'utilitarisme jusqu'à l'absurde",
+          name: "Cinq organes, un donneur", tagline: "L'utilitarisme jusqu'à l'absurde",
           intro: "Vous êtes médecin. Cinq patients vont mourir, chacun par défaillance d'un organe différent. Un patient sain entre pour un examen de routine : ses cinq organes pourraient sauver les cinq autres.",
           labels: { act: "Prélever les organes", wait: "Ne rien faire" },
           outcomes: {
@@ -715,8 +663,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         condamne: {
-          name: "Le détenu en sursis",
-          tagline: "Un condamné devient-il donneur ?",
+          name: "Le détenu en sursis", tagline: "Un condamné devient-il donneur ?",
           intro: "Le patient sain est un condamné à mort en sursis, dans un pays où la peine capitale existe. Légalement, sa vie est déjà « perdue ». Médicalement, ses organes sauveraient les cinq.",
           labels: { act: "Prélever les organes", wait: "Ne rien faire" },
           outcomes: {
@@ -729,8 +676,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
           }
         },
         enfants: {
-          name: "Cinq enfants malades",
-          tagline: "L'âge change-t-il le calcul ?",
+          name: "Cinq enfants malades", tagline: "L'âge change-t-il le calcul ?",
           intro: "Vous êtes médecin. Cinq enfants de huit ans vont mourir, chacun par défaillance d'un organe. Un adulte sain entre pour un examen : ses organes pourraient les sauver.",
           labels: { act: "Prélever les organes", wait: "Ne rien faire" },
           outcomes: {
@@ -742,23 +688,8 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
               deaths: 5, saved: 0 }
           }
         },
-        ami: {
-          name: "Votre ami en consultation",
-          tagline: "Et si le donneur vous était cher ?",
-          intro: "Vous êtes médecin. Cinq patients vont mourir, chacun d'un organe différent. Votre meilleur ami entre dans votre cabinet pour un contrôle. Ses organes sauveraient les cinq.",
-          labels: { act: "Prélever les organes", wait: "Ne rien faire" },
-          outcomes: {
-            act: { tag: "Impartialité héroïque", title: "L'amitié ne change pas le calcul",
-              text: "Position théoriquement cohérente avec l'utilitarisme impartial, mais qui détruirait toute relation humaine durable. Personne n'irait plus jamais consulter un médecin qui peut le sacrifier — et l'institution médicale s'effondre.",
-              deaths: 1, saved: 5 },
-            wait: { tag: "Loyauté et tabou médical", title: "Deux remparts",
-              text: "Refuser cumule la loyauté amicale et le serment d'Hippocrate. Mais comme dans toutes les variantes du dilemme du médecin, cinq personnes meurent — et avec elles, leurs amis, leurs liens, leurs vies futures.",
-              deaths: 5, saved: 0 }
-          }
-        },
         terminal: {
-          name: "Le donneur condamné par la maladie",
-          tagline: "Une vie qui s'éteint déjà",
+          name: "Le donneur condamné par la maladie", tagline: "Une vie qui s'éteint déjà",
           intro: "Le patient sain a en réalité une maladie incurable que vous venez de diagnostiquer (il l'ignore). Il mourra dans six mois. Ses organes encore fonctionnels pourraient sauver les cinq.",
           labels: { act: "Prélever les organes", wait: "Ne rien faire" },
           outcomes: {
@@ -768,6 +699,180 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
             wait: { tag: "Autonomie informée", title: "C'est à lui de choisir",
               text: "Avant toute décision, il a droit à connaître son état et à décider lui-même du don de ses organes. Le paternalisme médical du vingtième siècle est précisément ce que la bioéthique moderne a démonté, pierre par pierre.",
               deaths: 5, saved: 0 }
+          }
+        }
+      }
+    },
+
+    argent: {
+      name: "L'argent", theme: "Quand le calcul devient personnel",
+      family: "abstract",
+      label: "L'ARGENT",
+      verbsPresent: { act: "La décision est prise...", wait: "Vous gardez l'inaction..." },
+      verbsAfter: { act: "Le choix engage tout votre rapport à l'argent.", wait: "Le statu quo l'emporte." },
+      variants: {
+        heritage: {
+          name: "L'héritage", tagline: "Famille ou bénéfice global",
+          intro: "Vous avez un million d'euros à léguer par testament. Deux options : soit à votre enfant unique, soit à une ONG qui sauvera, statistiquement, une centaine d'enfants de la malnutrition.",
+          labels: { act: "Léguer à l'ONG", wait: "Léguer à votre enfant" },
+          shortLabels: { act: "L'ONG\n100 enfants\nsauvés", wait: "Votre enfant\nbien doté" },
+          outcomes: {
+            act: { tag: "Impartialité radicale", title: "Cent vies pèsent plus qu'un héritier",
+              text: "Position défendue par Peter Singer : sauver une centaine de vies pèse plus que confortablement enrichir un héritier. Logiquement difficile à réfuter — et pourtant la quasi-totalité des parents fortunés du monde la rejette. Que faut-il en conclure : qu'ils ont tort, ou que l'éthique théorique heurte ici quelque chose de plus profond ?" },
+            wait: { tag: "Devoirs familiaux", title: "L'héritage est un acte d'amour",
+              text: "L'héritage structure la transmission depuis des millénaires : on ne lègue pas seulement de l'argent, on lègue un projet, une histoire, une continuité. Mais une centaine d'enfants meurent que vous auriez pu sauver — et cette réalité ne disparaît pas parce qu'elle vous est invisible." }
+          }
+        },
+        bills: {
+          name: "Le sac de billets", tagline: "L'anneau de Gygès",
+          intro: "Vous trouvez un sac contenant cent mille euros dans un parking désert. Aucune caméra, aucun témoin, aucune trace identifiable du propriétaire. Le rendre à la police ou le garder.",
+          labels: { act: "Le garder", wait: "Le rendre" },
+          shortLabels: { act: "100 000 €\nsans témoin", wait: "Honnêteté\ninvisible" },
+          outcomes: {
+            act: { tag: "Anneau de Gygès", title: "La vertu testée hors regard",
+              text: "Platon imagine dans la République un anneau qui rend invisible : qui résisterait à la tentation s'il n'avait rien à craindre ? Vous démontrez que votre vertu dépendait du regard des autres. L'argent change votre vie sans victime visible — mais quelqu'un, quelque part, a perdu cette somme." },
+            wait: { tag: "Vertu sans témoin", title: "L'intégrité comme principe",
+              text: "Kant écrit que la maxime de votre action doit pouvoir être universalisée. Si tout le monde gardait l'argent trouvé, la confiance sociale s'effondrerait. Vous prouvez que votre intégrité ne dépend pas de la surveillance. Mais vous renoncez à un changement de vie sans victime claire." }
+          }
+        },
+        bribe: {
+          name: "Le pot-de-vin", tagline: "Argent contre statistique",
+          intro: "Vous êtes ingénieur qualité. Un client propose cinquante mille euros pour fermer les yeux sur un défaut qui causera, statistiquement, deux morts par an parmi les utilisateurs. Personne ne pourra prouver votre rôle.",
+          labels: { act: "Accepter le pot-de-vin", wait: "Refuser et alerter" },
+          shortLabels: { act: "50 000 €\n2 morts/an\nstatistiques", wait: "Carrière\nà risque" },
+          outcomes: {
+            act: { tag: "Diffusion morale", title: "Les morts statistiques sont diffuses",
+              text: "Vous traitez les morts comme une externalité anonyme, sans visage. C'est exactement comme ça que les scandales industriels (amiante, Volkswagen, opioïdes) ont fonctionné : aucun acteur ne se sent personnellement meurtrier, parce que chaque mort est statistique, dispersée, invisible." },
+            wait: { tag: "Lanceur d'alerte", title: "Les morts statistiques sont des morts",
+              text: "Vous reconnaissez que deux morts par an, ce sont deux vies réelles, deux familles. Mais devenir lanceur d'alerte ruine généralement la carrière du messager (Frances Haugen, Edward Snowden, Antoine Deltour) — et les morts continuent parfois malgré l'alerte si l'institution est complice." }
+          }
+        },
+        insurance: {
+          name: "L'assurance vie", tagline: "Fraude par amour",
+          intro: "Votre conjoint est en phase terminale d'une maladie incurable. L'assurance vie ne paiera pas pour une mort « prévisible ». Il vous demande de l'aider à simuler un accident pour que vous et vos enfants soyez à l'abri.",
+          labels: { act: "L'aider à simuler", wait: "Refuser" },
+          shortLabels: { act: "Famille\nà l'abri\n(fraude)", wait: "Précarité\nhonnête" },
+          outcomes: {
+            act: { tag: "Amour transgressif", title: "L'amour contre la légalité",
+              text: "Vous priorisez la sécurité matérielle de vos proches sur le respect du contrat. C'est un acte d'amour qui est aussi un crime — mais qui ne lèse, in fine, qu'une compagnie d'assurance qui a « parié » contre vous et qui dispose des moyens d'absorber la perte." },
+            wait: { tag: "Respect du contrat", title: "La loi tient même par compassion",
+              text: "Vous respectez le contrat et la loi. Mais vous laissez votre famille dans la précarité alors qu'un mensonge bien fait l'aurait évitée. La frontière entre « fraude » et « défense légitime » est ici extrêmement mince — c'est précisément ce que les compagnies exploitent." }
+          }
+        }
+      }
+    },
+
+    famille: {
+      name: "La famille", theme: "Vérité, loyauté, secrets",
+      family: "abstract",
+      label: "LA FAMILLE",
+      verbsPresent: { act: "Vous prenez la parole...", wait: "Vous gardez le silence..." },
+      verbsAfter: { act: "Le secret est brisé.", wait: "Le statu quo persiste." },
+      variants: {
+        infidelity: {
+          name: "L'infidélité du conjoint", tagline: "Briser une vie par vérité",
+          intro: "Vous avez la preuve formelle que le conjoint de votre meilleur·e ami·e le/la trompe depuis deux ans. Le dire ou se taire ?",
+          labels: { act: "Le lui dire", wait: "Se taire" },
+          shortLabels: { act: "Vérité\ndouloureuse", wait: "Silence\ncomplice" },
+          outcomes: {
+            act: { tag: "Droit à la vérité", title: "Un mensonge subi est pire",
+              text: "Position kantienne sur le droit à la vérité : votre ami·e construit sa vie sur une fausse hypothèse. Vous lui rendez sa capacité à choisir en connaissance de cause. Mais vous serez le messager qui détruit son monde — et beaucoup ne pardonnent jamais au messager." },
+            wait: { tag: "Respect du couple", title: "Ce n'est pas votre histoire",
+              text: "Vous respectez le périmètre du couple : la révélation appartient à celui qui trompe, pas à un tiers. Position défendable, surtout si la relation peut encore se réparer en interne. Mais vous laissez votre ami·e vivre dans le mensonge, ce que vous-même ne voudriez jamais." }
+          }
+        },
+        adoption: {
+          name: "L'adoption cachée", tagline: "Héritage et silence",
+          intro: "Vos parents adoptifs vous ont caché votre adoption pendant trente ans. Vous découvrez par hasard que votre père biologique est encore vivant. Le contacter ?",
+          labels: { act: "Contacter le père biologique", wait: "Respecter le silence familial" },
+          shortLabels: { act: "Connaître\nses origines", wait: "Honorer\nles parents adoptifs" },
+          outcomes: {
+            act: { tag: "Droit aux origines", title: "Connaître d'où l'on vient",
+              text: "Vous revendiquez un droit fondamental à connaître vos origines (Convention internationale des droits de l'enfant, article 7). Une partie de votre identité a été retenue ; vous la reprenez. Mais vous trahissez le secret que vos parents adoptifs portent depuis trente ans, peut-être au prix de leur capacité à vous aimer pleinement." },
+            wait: { tag: "Loyauté élective", title: "Ceux qui vous ont élevé",
+              text: "Vous honorez le pacte tacite avec ceux qui ont fait le travail réel : la famille n'est pas le sang mais l'histoire partagée. Mais vous renoncez à une part de vous-même, et le père biologique mourra peut-être sans savoir." }
+          }
+        },
+        diagnostic: {
+          name: "Le diagnostic de votre mère", tagline: "La vérité qui tue avant",
+          intro: "Votre mère, soixante-quinze ans, vous demande la vérité sur son état. Le médecin vous a dit qu'elle ne survivra pas trois mois — elle l'ignore. Lui dire ?",
+          labels: { act: "Lui dire la vérité", wait: "Mentir par compassion" },
+          shortLabels: { act: "Vérité\n+ 3 mois\nde lucidité", wait: "Mensonge\n+ 3 mois\nd'illusion" },
+          outcomes: {
+            act: { tag: "Autonomie informée", title: "Le droit de savoir",
+              text: "Vous respectez son autonomie : elle a le droit de savoir, de mettre ses affaires en ordre, de dire au revoir. C'est la position de la bioéthique moderne depuis les années 1980. Mais elle vivra ses trois derniers mois dans la terreur du compte à rebours." },
+            wait: { tag: "Paternalisme protecteur", title: "Le confort avant la vérité",
+              text: "Vous priorisez son confort psychologique sur la vérité abstraite. Position du paternalisme médical traditionnel, défendue par les générations de médecins du vingtième siècle. Mais vous lui volez la possibilité d'utiliser ces trois mois comme elle l'entendrait — et elle pourrait deviner sans avoir le droit de le formuler." }
+          }
+        },
+        abortion: {
+          name: "Le désaccord parental", tagline: "Le couple face à l'enfance",
+          intro: "Vous êtes enceinte par accident, dans un couple stable. Votre conjoint souhaite vivement garder l'enfant. Vous, non. Aucune raison médicale, juste une certitude profonde.",
+          labels: { act: "Avorter", wait: "Garder l'enfant" },
+          shortLabels: { act: "Autonomie\ncorporelle\n+ couple à risque", wait: "Couple sauvé\n+ enfant non désiré" },
+          outcomes: {
+            act: { tag: "Autonomie corporelle", title: "Votre corps, votre décision",
+              text: "Vous affirmez votre autonomie corporelle absolue. Aucune autre personne, conjoint inclus, n'a de droit sur votre corps. Position défendue par le féminisme depuis Simone de Beauvoir. Mais vous risquez de perdre votre couple — et un enfant désiré par l'un seulement reste un dilemme conjugal lourd." },
+            wait: { tag: "Projet commun", title: "Le couple comme priorité",
+              text: "Vous priorisez le projet commun sur votre désir personnel. C'est une forme de don que certaines mères assument finalement avec amour. Mais vous porterez et élèverez un enfant que vous ne vouliez pas — un poids qui rejaillit souvent sur la relation parent-enfant." }
+          }
+        }
+      }
+    },
+
+    guerre: {
+      name: "La guerre", theme: "Loyauté, courage, désobéissance",
+      family: "abstract",
+      label: "LA GUERRE",
+      verbsPresent: { act: "L'acte est commis...", wait: "L'inaction l'emporte..." },
+      verbsAfter: { act: "Les conséquences sont engagées.", wait: "Le silence pèse." },
+      variants: {
+        interrogation: {
+          name: "L'interrogatoire", tagline: "Parler ou tenir",
+          intro: "Vous êtes résistant, capturé. Sous la torture, vous finirez par parler. Si vous parlez maintenant, vos cinq camarades ont vingt-quatre heures pour fuir. Si vous tenez, vous risquez d'en sauver plus mais les statistiques ne sont pas en votre faveur.",
+          labels: { act: "Parler tout de suite", wait: "Tenir le plus longtemps possible" },
+          shortLabels: { act: "Parler\ntôt = 5 fuient", wait: "Tenir\n= pari risqué" },
+          outcomes: {
+            act: { tag: "Limites humaines", title: "Tout le monde finit par parler",
+              text: "Vous reconnaissez vos limites humaines : la torture a un taux de réussite documenté de près de cent pour cent quand elle dure assez longtemps. Mieux vaut parler maintenant et donner à vos camarades une chance de fuir avant que l'information ne soit exploitable. Mais vous porterez le poids d'avoir « collaboré » même si c'était stratégique." },
+            wait: { tag: "Vertu héroïque", title: "Chaque heure peut compter",
+              text: "Vous tentez de protéger le réseau plus longtemps, conscient que chaque heure de silence peut sauver d'autres vies que vous ne connaissez pas. Vertu héroïque. Mais c'est aussi un pari risqué : si vous parlez plus tard, l'effet de surprise est perdu et vos camarades n'auront pas eu le temps de fuir." }
+          }
+        },
+        deserter: {
+          name: "Le déserteur", tagline: "Le maquis ou la famille",
+          intro: "On vous demande de quitter votre femme enceinte pour rejoindre le maquis. Refuser passera pour de la lâcheté. Partir prive votre famille de son seul soutien dans une période où les denrées sont rationnées.",
+          labels: { act: "Rejoindre le maquis", wait: "Rester avec la famille" },
+          shortLabels: { act: "Lutte\ncollective", wait: "Famille\nimmédiate" },
+          outcomes: {
+            act: { tag: "Engagement politique", title: "L'urgence historique",
+              text: "Vous priorisez la lutte collective sur le bien immédiat des vôtres. Position défendue par les engagements politiques radicaux : l'urgence historique l'emporte sur le confort familial. Mais votre enfant naîtra peut-être sans vous, et votre femme vous en voudra peut-être toute sa vie — bien après que la cause aura été gagnée ou perdue." },
+            wait: { tag: "Devoir immédiat", title: "Ceux dont vous êtes responsable",
+              text: "Vous reconnaissez les devoirs immédiats envers les vôtres. Sartre raconte dans « L'existentialisme est un humanisme » le dilemme exact d'un étudiant qui ne sait s'il doit rejoindre la France libre ou rester auprès de sa mère malade. Mais l'Histoire vous jugera : si la résistance échoue par manque de bras, votre conscience aussi." }
+          }
+        },
+        collabo: {
+          name: "Le voisin collaborateur", tagline: "Vengeance ou justice",
+          intro: "Votre voisin a dénoncé pendant l'Occupation une famille juive cachée chez vous, qui a été déportée et exterminée. La guerre est finie. Personne ne le sait. La justice est probablement clémente avec les « petits » collabos.",
+          labels: { act: "Le tuer", wait: "Laisser la justice faire" },
+          shortLabels: { act: "Vengeance\npersonnelle", wait: "État de droit\n(probablement clément)" },
+          outcomes: {
+            act: { tag: "Justice privée", title: "Quand l'État faillit",
+              text: "Vous estimez que certains crimes appellent une réponse personnelle quand l'État faillit. Position défendue historiquement par les vengeurs juifs après-guerre (le groupe Nakam). Mais vous devenez à votre tour un meurtrier — et la chaîne des représailles n'a historiquement jamais de fin." },
+            wait: { tag: "Monopole étatique", title: "La civilisation tient à ça",
+              text: "Vous respectez le monopole étatique de la violence légitime (Weber). Sans cette règle, pas de civilisation possible — chaque crime du passé devient une licence de tuer dans le présent. Mais vous regarderez probablement votre voisin marcher libre dans le quartier jusqu'à sa mort naturelle, et vivrez avec cette injustice." }
+          }
+        },
+        sabotage: {
+          name: "Le sabotage du train", tagline: "Civils contre soldats",
+          intro: "Faire sauter un train ennemi tuerait cinquante soldats et raccourcirait la guerre de plusieurs semaines. Mais cinq civils français sont à bord, otages utilisés comme boucliers humains. Saboter ou laisser passer ?",
+          labels: { act: "Saboter le train", wait: "Laisser passer" },
+          shortLabels: { act: "50 soldats\n+ 5 civils\nmorts", wait: "0 mort\nimmédiate\n(guerre prolongée)" },
+          outcomes: {
+            act: { tag: "Double effet militaire", title: "Civils en dommage collatéral",
+              text: "Vous appliquez la doctrine du double effet en contexte militaire : les civils morts sont un effet collatéral d'un objectif militaire légitime (Michael Walzer, « Just and Unjust Wars »). Mais l'usage de civils comme boucliers vise précisément à vous mettre dans cette impasse morale — vous tombez dans le piège tendu." },
+            wait: { tag: "Conventions humanitaires", title: "Pas un civil pour un objectif",
+              text: "Vous refusez de tuer des civils français même pour un objectif militaire majeur. Position conforme aux Conventions de Genève (protocole I, 1977). Mais la guerre dure plus longtemps, et des centaines d'autres mourront ailleurs pendant les semaines gagnées par l'ennemi." }
           }
         }
       }
@@ -788,8 +893,10 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
       variantName: variant.name,
       family: cat.family,
       sceneVariant: cat.sceneVariant,
+      categoryLabel: cat.label,
       intro: variant.intro,
       labels: variant.labels,
+      shortLabels: variant.shortLabels,
       verbsPresent: variant.verbsPresent || cat.verbsPresent,
       verbsAfter: variant.verbsAfter || cat.verbsAfter,
       outcomes: variant.outcomes
@@ -809,7 +916,7 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
   const lobbyError = $("lobby-error");
   const roomCode = $("room-code"), roundLabel = $("round-label");
   const playersBar = $("players-bar");
-  const sceneTrolley = $("scene-trolley"), sceneHospital = $("scene-hospital");
+  const sceneTrolley = $("scene-trolley"), sceneHospital = $("scene-hospital"), sceneAbstract = $("scene-abstract");
   const statusLine = $("status-line");
   const hostBetween = $("host-between"), guestWaiting = $("guest-waiting");
   const scenarioGrid = $("scenario-grid"), nextRoundNum = $("next-round-num");
@@ -825,8 +932,14 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
   const bridgeGroup = $("bridge-group"), bridgeMan = $("bridge-man");
   const operator = $("operator");
   const fivePeople = $("five-people"), onePerson = $("one-person");
-  const loopIndicator = $("loop-indicator"), impactBurst = $("impact-burst");
+  const impactBurst = $("impact-burst");
   const fivePatients = $("five-patients"), healthyPatient = $("healthy-patient");
+
+  const abstractCategoryLabel = $("abstract-category-label");
+  const abstractLeftCircle = $("abstract-left-circle"), abstractRightCircle = $("abstract-right-circle");
+  const abstractLeftTexts = [$("abstract-left-text-1"), $("abstract-left-text-2"), $("abstract-left-text-3")];
+  const abstractRightTexts = [$("abstract-right-text-1"), $("abstract-right-text-2"), $("abstract-right-text-3")];
+  const abstractArrowLeft = $("abstract-arrow-left"), abstractArrowRight = $("abstract-arrow-right");
 
   // ===================== HELPERS =====================
   function isHost() {
@@ -845,6 +958,12 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
   function hide(el) { el.style.display = "none"; }
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  }
+  function setSphereText(tspans, text) {
+    const lines = (text || "").split("\n");
+    for (let i = 0; i < tspans.length; i++) {
+      tspans[i].textContent = lines[i] || "";
+    }
   }
 
   // ===================== LOBBY =====================
@@ -912,26 +1031,26 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
 
   // ===================== SCENE SWAP =====================
   function showScene(family, variant) {
-    if (family === "hospital") { hide(sceneTrolley); show(sceneHospital); return; }
-    hide(sceneHospital); show(sceneTrolley);
+    hide(sceneTrolley); hide(sceneHospital); hide(sceneAbstract);
+    if (family === "hospital") { show(sceneHospital); return; }
+    if (family === "abstract") { show(sceneAbstract); return; }
+    show(sceneTrolley);
     if (variant === "bridge") {
       deviatedTrack.style.display = "none"; leverStation.style.display = "none";
       operator.style.display = "none"; onePerson.style.display = "none";
-      loopIndicator.style.display = "none"; bridgeGroup.style.display = "";
-    } else if (variant === "loop") {
-      deviatedTrack.style.display = ""; leverStation.style.display = "";
-      operator.style.display = ""; onePerson.style.display = "";
-      bridgeGroup.style.display = "none"; loopIndicator.style.display = "";
+      bridgeGroup.style.display = "";
     } else {
       deviatedTrack.style.display = ""; leverStation.style.display = "";
       operator.style.display = ""; onePerson.style.display = "";
-      bridgeGroup.style.display = "none"; loopIndicator.style.display = "none";
+      bridgeGroup.style.display = "none";
     }
   }
   function resetScene(scenarioKey) {
     const sc = getScenario(scenarioKey);
     if (!sc) return;
     showScene(sc.family, sc.sceneVariant);
+
+    // Trolley reset
     tram.style.transition = "none";
     tram.setAttribute("transform", "translate(105, 225)");
     void tram.getBoundingClientRect();
@@ -942,10 +1061,24 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
     bridgeMan.setAttribute("transform", "translate(400, 150)");
     void bridgeMan.getBoundingClientRect();
     bridgeMan.style.transition = "";
+
     document.querySelectorAll(".victim").forEach(v => v.classList.remove("fallen"));
     impactBurst.classList.remove("show");
     const qm = $("question-mark"); if (qm) qm.style.opacity = "1";
     const qm2 = $("question-mark-2"); if (qm2) qm2.style.opacity = "1";
+    const qm3 = $("question-mark-3"); if (qm3) qm3.style.opacity = "1";
+
+    // Abstract reset
+    if (sc.family === "abstract") {
+      abstractCategoryLabel.textContent = sc.categoryLabel || "";
+      const sl = sc.shortLabels || { act: "", wait: "" };
+      setSphereText(abstractLeftTexts, sl.act);
+      setSphereText(abstractRightTexts, sl.wait);
+      abstractLeftCircle.classList.remove("chosen", "unchosen");
+      abstractRightCircle.classList.remove("chosen", "unchosen");
+      abstractArrowLeft.classList.remove("show");
+      abstractArrowRight.classList.remove("show");
+    }
   }
 
   // ===================== ANIMATIONS =====================
@@ -960,7 +1093,9 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
     if (!sc) return;
     const qm = $("question-mark"); if (qm) qm.style.opacity = "0";
     const qm2 = $("question-mark-2"); if (qm2) qm2.style.opacity = "0";
+    const qm3 = $("question-mark-3"); if (qm3) qm3.style.opacity = "0";
     if (sc.family === "hospital") return playHospitalAnimation(sc, choice);
+    if (sc.family === "abstract") return playAbstractAnimation(sc, choice);
     if (sc.sceneVariant === "bridge") return playBridgeAnimation(sc, choice);
     return playTrolleyAnimation(sc, choice);
   }
@@ -1036,6 +1171,21 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
         statusLine.textContent = sc.verbsAfter.wait;
       }, 1300);
     }
+  }
+  function playAbstractAnimation(sc, choice) {
+    statusLine.textContent = choice === "act" ? sc.verbsPresent.act : sc.verbsPresent.wait;
+    setTimeout(() => {
+      if (choice === "act") {
+        abstractArrowLeft.classList.add("show");
+        abstractLeftCircle.classList.add("chosen");
+        abstractRightCircle.classList.add("unchosen");
+      } else {
+        abstractArrowRight.classList.add("show");
+        abstractRightCircle.classList.add("chosen");
+        abstractLeftCircle.classList.add("unchosen");
+      }
+      statusLine.textContent = choice === "act" ? sc.verbsAfter.act : sc.verbsAfter.wait;
+    }, 800);
   }
 
   // ===================== RENDER =====================
@@ -1129,12 +1279,13 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
         const majority = majorityChoice(state.votes);
         if (majority) playAnimation(state.currentScenario, majority);
         if (pendingRevealTimer) clearTimeout(pendingRevealTimer);
+        const delay = sc.family === "hospital" ? 2200 : (sc.family === "abstract" ? 2000 : 3400);
         pendingRevealTimer = setTimeout(() => {
           renderRevealCard(state, sc);
           show(revealCard);
           if (isHost()) show(hostNext);
           pendingRevealTimer = null;
-        }, sc.family === "hospital" ? 2200 : 3400);
+        }, delay);
       } else {
         renderRevealCard(state, sc);
         show(revealCard);
@@ -1221,10 +1372,12 @@ h1 { font-size: 2rem; font-weight: normal; letter-spacing: -0.5px; }
     const majority = majorityChoice(votes);
     if (majority) {
       const outcome = sc.outcomes[majority];
-      const label = counts.act === counts.wait ? "majorité par défaut (égalité)" : "choix majoritaire";
-      html += '<div class="body-count">'
-        + '<span class="deaths"><strong>' + outcome.deaths + '</strong> mort(s) — ' + label + '</span>'
-        + '<span class="saved"><strong>' + outcome.saved + '</strong> sauvée(s)</span></div>';
+      if (outcome.deaths !== undefined && outcome.saved !== undefined) {
+        const label = counts.act === counts.wait ? "majorité par défaut (égalité)" : "choix majoritaire";
+        html += '<div class="body-count">'
+          + '<span class="deaths"><strong>' + outcome.deaths + '</strong> mort(s) — ' + label + '</span>'
+          + '<span class="saved"><strong>' + outcome.saved + '</strong> sauvée(s)</span></div>';
+      }
     }
     revealCard.innerHTML = html;
   }
