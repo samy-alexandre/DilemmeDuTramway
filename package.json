@@ -1,0 +1,16 @@
+{
+  "name": "le-dilemme",
+  "version": "5.0.0",
+  "description": "Multiplayer moral dilemma game — 13 categories, 60+ variants, psychological profiles",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
