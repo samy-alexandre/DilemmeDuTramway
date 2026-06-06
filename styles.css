@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-color" content="#0a0a0e">
+<title>Le Dilemme — V3</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <header class="app-header">
+    <h1 class="app-title">Le Dilemme</h1>
+    <p class="app-subtitle">Expérience de pensée morale — multijoueur</p>
+    <button id="btn-sound" class="sound-toggle" type="button" aria-pressed="false" aria-label="Activer le son">🔇 Son</button>
+  </header>
+
+  <!-- ============== LOBBY ============== -->
+  <section id="lobby" aria-label="Lobby">
+    <div class="lobby-card">
+      <h2>Créer une partie</h2>
+      <p>Vous serez l'hôte : vous lancez les tours et révélez les votes.</p>
+      <label class="sr-only" for="host-name">Votre pseudo</label>
+      <input id="host-name" placeholder="Votre pseudo" maxlength="20" autocomplete="off">
+      <button id="btn-create" class="btn-primary" type="button">Créer la partie</button>
+    </div>
+    <div class="lobby-card">
+      <h2>Rejoindre une partie</h2>
+      <p>Saisissez le code à 4 caractères donné par l'hôte.</p>
+      <label class="sr-only" for="guest-code">Code de la partie</label>
+      <input id="guest-code" placeholder="ABCD" maxlength="4" style="text-transform: uppercase; letter-spacing: 4px; font-family: monospace;" autocomplete="off">
+      <label class="sr-only" for="guest-name">Votre pseudo</label>
+      <input id="guest-name" placeholder="Votre pseudo" maxlength="20" autocomplete="off">
+      <button id="btn-join" type="button">Rejoindre</button>
+    </div>
+    <p id="lobby-error" class="lobby-error" role="alert" aria-live="polite"></p>
+  </section>
+
+  <!-- ============== GAME ============== -->
+  <section id="game" style="display:none" aria-label="Partie en cours">
+    <div class="game-header">
+      <div class="room-info">
+        <span>Salle</span>
+        <span class="room-code" id="room-code"></span>
+        <span class="round-counter" id="round-label"></span>
+        <span class="mode-badge" id="mode-badge" style="display:none"></span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-copy-link" class="btn-small" type="button">Inviter ↗</button>
+        <button id="btn-end-game" class="btn-small btn-end" type="button" style="display:none">Terminer et analyser</button>
+      </div>
+    </div>
+
+    <div class="players-bar" id="players-bar" aria-label="Liste des joueurs"></div>
+
+    <!-- ============== SCENE ============== -->
+    <div class="scene-wrap">
+      <div id="scene-container" aria-hidden="true"></div>
+    </div>
+
+    <p class="status-line" id="status-line" aria-live="polite"></p>
+
+    <!-- ============== TIMER ============== -->
+    <div class="timer-wrap" id="timer-wrap" aria-hidden="true">
+      <div class="timer-bar" id="timer-bar"></div>
+    </div>
+
+    <!-- ============== HOST PANEL (between rounds) ============== -->
+    <div class="host-panel" id="host-between" style="display:none">
+      <div class="setup-row">
+        <label class="setup-label" for="select-mode">Mode :</label>
+        <select id="select-mode">
+          <option value="classique">Classique</option>
+          <option value="psy">Psychologique</option>
+          <option value="pression">Pression</option>
+        </select>
+        <label class="setup-label" for="select-timer">Timer :</label>
+        <select id="select-timer">
+          <option value="0">aucun</option>
+          <option value="3">3 sec</option>
+          <option value="10">10 sec</option>
+          <option value="20">20 sec</option>
+        </select>
+      </div>
+      <h3>Tour <span id="next-round-num"></span> — Choisissez un dilemme</h3>
+      <div id="scenario-grid"></div>
+    </div>
+
+    <div class="waiting-panel" id="guest-waiting" style="display:none">
+      <em>L'hôte choisit le prochain dilemme...</em>
+      <span class="hint">Vous voterez dans un instant.</span>
+    </div>
+
+    <div class="intro-card" id="intro-card" style="display:none"></div>
+
+    <div class="vote-controls" id="vote-controls" style="display:none">
+      <button class="btn-act" id="btn-act" type="button"></button>
+      <button class="btn-wait" id="btn-wait" type="button"></button>
+    </div>
+
+    <div class="vote-confirm" id="vote-confirm" style="display:none"></div>
+
+    <div id="host-reveal" style="display:none; margin-bottom: 1.25rem;">
+      <button class="btn-reveal" id="btn-reveal" type="button">Révéler les votes</button>
+    </div>
+
+    <div class="reveal-card" id="reveal-card" style="display:none" aria-live="polite"></div>
+
+    <div id="host-next" style="display:none; margin-bottom: 1.25rem;">
+      <button class="btn-primary" id="btn-next-round" type="button">Tour suivant ↗</button>
+    </div>
+
+    <div class="final-analysis" id="final-analysis" style="display:none" aria-live="polite"></div>
+
+    <details id="history-section" style="display:none">
+      <summary>Historique des tours</summary>
+      <div id="history-list"></div>
+    </details>
+  </section>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="data/scenarios.js"></script>
+<script src="data/profileRules.js"></script>
+<script src="audio.js"></script>
+<script src="scenes.js"></script>
+<script src="client.js"></script>
+</body>
+</html>
